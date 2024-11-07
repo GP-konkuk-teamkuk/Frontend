@@ -1,0 +1,15 @@
+.register-form {
+}
+.item-container {
+  margin: 0.5rem auto;
+}
+
+.item-container span {
+  display: inline-block;
+  width: 5rem;
+  text-align: left;
+  color: #756AB6;
+}
+.register-form button {
+  margin: 3rem;
+}

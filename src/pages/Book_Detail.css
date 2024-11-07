@@ -1,0 +1,19 @@
+.top-container {
+  display: flex;
+  color: white;
+}
+.top-left-container {
+  width: 760px;
+  height: 940px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.detail-bookimg {
+  width: 500px;
+  height: 750px;
+}
+
+.bottom-container {
+  color: white;
+}

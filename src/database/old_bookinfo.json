@@ -1,0 +1,91 @@
+
+
+
+{
+  "generalInfos": {
+    "page1": [
+      {
+        "id": "1",
+        "title": "Title1",
+        "author": "Author1",
+        "runningTime": "10"
+      },
+      {
+        "id": "2",
+        "title": "Title2",
+        "author": "Author2",
+        "runningTime": "20"
+      },
+      {
+        "id": "3",
+        "title": "Title3",
+        "author": "Author3",
+        "runningTime": "30"
+      }
+    ],
+    "page2": [
+      {
+        "id": "4",
+        "title": "Title4",
+        "author": "Author4",
+        "runningTime": "40"
+      },
+      {
+        "id": "5",
+        "title": "Title5",
+        "author": "Author5",
+        "runningTime": "50"
+      },
+      {
+        "id": "6",
+        "title": "Title6",
+        "author": "Author6",
+        "runningTime": "60"
+      }
+    ],
+    "page3": [
+      {
+        "id": "7",
+        "title": "Title7",
+        "author": "Author7",
+        "runningTime": "70"
+      },
+      {
+        "id": "8",
+        "title": "Title8",
+        "author": "Author8",
+        "runningTime": "80"
+      },
+      {
+        "id": "9",
+        "title": "Title9",
+        "author": "Author9",
+        "runningTime": "90"
+      },
+      {
+        "id": "10",
+        "title": "Title10",
+        "author": "Author10",
+        "runningTime": "100"
+      }
+    ]
+  },
+  "detailInfos": [
+    {
+      "id": 1,
+      "title": "Book1",
+      "author": "Author1",
+      "press": "Press1",
+      "runningTime": "10",
+      "intro": "Intro1"
+    },
+    {
+      "id": 2,
+      "title": "Book2",
+      "author": "Author2",
+      "press": "Press2",
+      "runningTime": "20",
+      "intro": "Intro2"
+    }
+  ]
+}

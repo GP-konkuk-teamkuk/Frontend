@@ -1,0 +1,26 @@
+img.logo {
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+  height: 100%;
+}
+.logo-text {
+  color: #756AB6;
+  font-size: 3rem;
+  font-weight: 600;
+  text-align: center;
+}
+.logo-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+header {
+  height: 5rem;
+  width: 100%;
+
+  /* background-color: #999999; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

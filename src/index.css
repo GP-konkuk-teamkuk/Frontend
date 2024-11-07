@@ -1,13 +1,65 @@
+html {
+  height: 100%;
+  font-size: 16px;
+
+}
+/* 작은 화면 (모바일) */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+}
+/* 중간 화면 (작은 태블릿) */
+@media (min-width: 481px) and (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+/* 넓은 화면 (일반 태블릿 및 소형 노트북) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+}
+/* 큰 화면 (데스크탑 및 고해상도 노트북) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  html {
+    font-size: 17px;
+  }
+}
+/* 초고해상도 화면 (QHD 이상 해상도) */
+@media (min-width: 1441px) {
+  html {
+    font-size: 18px;
+  }
+}
+
 body {
+  height: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: lightgray;
+  font-size: 1rem;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+p {
+  margin: unset;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#root {
+  height: 100%;
 }

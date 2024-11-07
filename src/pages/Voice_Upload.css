@@ -1,0 +1,10 @@
+input[type="file"] {
+  display: none; /* 기본 파일 입력 숨기기 */
+}
+
+label.file-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
