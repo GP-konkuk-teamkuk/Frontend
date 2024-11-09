@@ -7,20 +7,20 @@ export default function P_Voice_Upload() {
   const [file, setFile] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const fileInputRef = useRef(null);
-  const SERVER_URL_FOR_UPLOAD = "";
+  const SERVER_URL_FOR_UPLOAD = "http://localhost:3001/api/audio/upload";
   const navigate = useNavigate();
 
   // 파일 선택 핸들러
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    const validTypes = ["audio/mpeg", "audio/wav", "audio/ogg"];
+    const validTypes = ["audio/x-m4a", "audio/wav"];
 
     if (selectedFile && validTypes.includes(selectedFile.type)) {
       setFile(selectedFile);
       setErrorMessage("");
     } else {
       setFile(null);
-      serErrorMessage("음성 파일(mp3, wav, ogg)만 업로드할 수 있습니다.");
+      setErrorMessage("음성 파일(m4a, wav)만 업로드할 수 있습니다.");
     }
   };
 
@@ -40,17 +40,18 @@ export default function P_Voice_Upload() {
     formData.append("file", file);
 
     try {
-      const response = await fetch(SERVER_URL_FOR_UPLOAD, {
+      const response =  fetch(SERVER_URL_FOR_UPLOAD, {
         method: "POST",
         body: formData,
       });
+      navigate("/voice-encoding");
 
       // 응답을 받을 수 있을 때 주석 해제.
       // ok면 페이지를 넘어갈 거라면, 파일에 문제가 있을 때는 어떻게 처리?
-      // if (!response.ok) {
-      //   throw new Error("파일 업로드 실패");
-      // }
-      navigate("/voice-encoding");
+       if (!(await response).ok) {
+         throw new Error("파일 업로드 실패");
+       }
+       navigate("/book-list");
     } catch (error) {
       alert("업로드 실패! 다시 시도하세요.", error);
       console.error("업로드 오류: ", error);
@@ -60,10 +61,16 @@ export default function P_Voice_Upload() {
   return (
     <>
       <Div_Align_Center>
-        <Msg_Lv1 text={"당신이 오디오로 듣고 싶은 목소리를 들려주세요"}></Msg_Lv1>
+        <Msg_Lv1
+          text={"당신이 오디오로 듣고 싶은 목소리를 들려주세요"}
+        ></Msg_Lv1>
       </Div_Align_Center>
       <Div_Align_Center>
-        <label htmlFor="file-upload" className="file-upload btn_lv1" onClick={handleButtonClick}>
+        <label
+          htmlFor="file-upload"
+          className="file-upload btn_lv1"
+          onClick={handleButtonClick}
+        >
           찾아보기
         </label>
         <input
