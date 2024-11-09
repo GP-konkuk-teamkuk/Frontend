@@ -9,10 +9,11 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const login = async (id, pw) => {
     try {
-      const response = await axios.post("/api/login", { id, pw }, { withCredentials: true });
-      if (response.status === 200) {
-        setUser({ id });
-      }
+      // const response = await axios.post("/api/login", { id, pw }, { withCredentials: true });
+      // if (response.status === 200) {
+      //   setUser({ id, nickname });
+      // }
+      setUser({ id: "black7321", nickname: "prel" });
       return true;
     } catch (error) {
       console.error("Login error: ", error);
@@ -22,7 +23,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post("/api/logout", {}, { withCredentials: true });
+      // await axios.post("/api/logout", {}, { withCredentials: true });
       setUser(null);
     } catch (erorr) {
       console.error("Logout error: ", error);

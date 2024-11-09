@@ -1,4 +1,4 @@
-import { HomePageContext } from "components/Context";
+import { HomePageContext, useAuth } from "components/Context";
 import "./Header.css";
 import { Btn_Lv2_Empty } from "components/Component";
 import logo from "logo.png";
@@ -30,18 +30,34 @@ export function Logo() {
 
 export default function Header() {
   const { homePage, setHomePage } = useContext(HomePageContext);
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
+
   const onClickLogin = () => {
     setHomePage("login");
+    navigate("/");
+  };
+
+  const onClickLogout = async () => {
+    logout();
     navigate("/");
   };
 
   return (
     <header>
       <Logo />
-      <button className="btn-lv2 btn-lv2-empty" onClick={onClickLogin}>
-        로그인
-      </button>
+      {user ? (
+        <div className="user-info">
+          <span className="user-nickname">{user.nickname}</span>
+          <button className="btn-lv2 btn-lv2-empty" onClick={onClickLogout}>
+            로그아웃
+          </button>
+        </div>
+      ) : (
+        <button className="btn-lv2 btn-lv2-empty" onClick={onClickLogin}>
+          로그인
+        </button>
+      )}
     </header>
   );
 }

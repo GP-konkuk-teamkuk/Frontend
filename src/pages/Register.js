@@ -7,15 +7,15 @@ import axios from "axios";
 export function F_Login() {
   const { homePage, setHomePage } = useContext(HomePageContext);
   const navigate = useNavigate();
-  const [id, setId] = useState("");
-  const [pw, setPw] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userPw, setUserPw] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { login } = useAuth();
 
   const onSubmitLogin = async (event) => {
     event.preventDefault();
 
-    const success = await login(id, pw);
+    const success = await login(userId, userPw);
     if (success) {
       setHomePage("home");
       navigate("/voice-upload");
@@ -26,22 +26,22 @@ export function F_Login() {
 
   return (
     <form className="login-form" onSubmit={onSubmitLogin}>
-      <div className="item-container id-container">
+      <div className="item-container userid-container">
         <span className="">ID</span>
         <input
           type="text"
           placeholder="ID"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
         ></input>
       </div>
-      <div className="item-container pw-container">
+      <div className="item-container userPw-container">
         <span className="">PW</span>
         <input
           type="text"
           placeholder="PW"
-          value={pw}
-          onChange={(e) => setPw(e.target.value)}
+          value={userPw}
+          onChange={(e) => setUserPw(e.target.value)}
         ></input>
       </div>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
@@ -52,27 +52,74 @@ export function F_Login() {
   );
 }
 
+async function registerUser(userData) {
+  try {
+    const response = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (!response.ok) {
+      throw new Error("회원가입에 실패했습니다.");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("회원가입 에러: ", error);
+    throw error;
+  }
+}
+
 export default function F_Register() {
   const { homePage, setHomePage } = useContext(HomePageContext);
+  const [nickname, setNickname] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userPw, setUserPw] = useState("");
 
-  const onSubemitRegister = (e) => {
+  const onSubemitRegister = async (event) => {
     event.preventDefault();
-    setHomePage("login");
+    const userData = { nickname, userId, userPw };
+
+    try {
+      const result = await registerUser(userData);
+      console.log("회원가입 성공: ", result);
+      setHomePage("login"); // 회원가입 성공 시 로그인 페이지로 이동
+    } catch (error) {
+      alert("회원가입에 실패했습니다. 다시 시도해 주세요.");
+    }
   };
 
   return (
     <form className="register-form" onSubmit={onSubemitRegister}>
       <div className="item-container nickname-container">
         <span className="">닉네임</span>
-        <input type="text" placeholder="닉네임"></input>
+        <input
+          type="text"
+          placeholder="닉네임"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+        ></input>
       </div>
       <div className="item-container id-container">
         <span className="">ID</span>
-        <input type="text" placeholder="ID"></input>
+        <input
+          type="text"
+          placeholder="ID"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
+        ></input>
       </div>
       <div className="item-container pw-container">
         <span className="">PW</span>
-        <input type="text" placeholder="PW"></input>
+        <input
+          type="text"
+          placeholder="PW"
+          value={userPw}
+          onChange={(e) => setUserPw(e.target.value)}
+        ></input>
       </div>
       <button type="submit" className="btn-lv2 btn-lv2-full">
         회원가입
