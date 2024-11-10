@@ -2,8 +2,6 @@ import { useContext, useState } from "react";
 import "./Register.css";
 import { HomePageContext, useAuth } from "components/Context";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 export function F_Login() {
   const { homePage, setHomePage } = useContext(HomePageContext);
@@ -16,16 +14,26 @@ export function F_Login() {
   const onSubmitLogin = async (event) => {
     event.preventDefault();
 
-    const success = await login(userId, userPw);
+    try {
+      const response = await fetch("http://localhost:3001/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: userId, pw: userPw }),
+      });
 
-    if (success) {
-      // 서버 연동 O
-      // if (true) {
-      // 서버 연동 X(테스트)
-      setHomePage("home");
-      navigate("/voice-upload");
-    } else {
-      setErrorMessage("로그인 실패: 올바른 ID와 PW를 입력하세요.");
+      if (response.ok) {
+        const data = await response.json();
+        login(data.token);
+        setHomePage("home");
+        navigate("/voice-upload");
+      } else {
+        setErrorMessage("로그인 실패: 올바른 ID와 PW를 입력하세요.");
+      }
+    } catch (error) {
+      console.error("로그인 에러: ", error);
+      setErrorMessage("로그인 실패: 서버 오류가 발생했습니다.");
     }
   };
 
@@ -43,7 +51,7 @@ export function F_Login() {
       <div className="item-container userPw-container">
         <span className="">PW</span>
         <input
-          type="text"
+          type="password"
           placeholder="PW"
           value={userPw}
           onChange={(e) => setUserPw(e.target.value)}
@@ -59,7 +67,8 @@ export function F_Login() {
 
 async function registerUser(userData) {
   try {
-    const response = await fetch("/api/register", {
+    const url = "http://localhost:3001";
+    const response = await fetch(url + "/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -86,7 +95,9 @@ export default function F_Register() {
 
   const onSubemitRegister = async (event) => {
     event.preventDefault();
-    const userData = { nickname: nickname, id: userId, pw: userPw };
+    const userData = { nickname, id: userId, pw: userPw };
+
+    console.log(userData);
 
     try {
       const result = await registerUser(userData);
@@ -120,7 +131,7 @@ export default function F_Register() {
       <div className="item-container pw-container">
         <span className="">PW</span>
         <input
-          type="text"
+          type="password"
           placeholder="PW"
           value={userPw}
           onChange={(e) => setUserPw(e.target.value)}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./Book_Detail.css";
 import bookImage from "bookImage.png";
 import { Title_Lv1, Title_Lv2, Text_Lv3 } from "components/Component";
@@ -8,34 +9,51 @@ import { useAuth } from "components/Context";
 export default function P_Book_Detail() {
   const [bookInfo, setBookInfo] = useState();
   const navigate = useNavigate();
-  const AUDIOBOOK_PRODUCTION_SERVER_URL = "";
+  const location = useLocation();
+  const AUDIOBOOK_PRODUCTION_SERVER_URL = "http://localhost:3001/api/audio";
+
+  const queryParams = new URLSearchParams(location.search);
+  const bookId = queryParams.get("bookId");
+  const userId = "1"; // TODO : replace userid
 
   useEffect(() => {
-    const urlWithBookId = `${AUDIOBOOK_PRODUCTION_SERVER_URL}?id=${bookInfo.id}`;
-
-    fetch(urlWithBookId)
-      .then((res) => {
-        return res.json();
+    fetch(`http://localhost:3001/api/book/detail?bookId=${bookId}`)
+      .then(async (res) => {
+        const json = await res.json();
+        return json;
       })
       .then((data) => {
-        setBookInfo(data[0]);
+        const bookData = {
+          id: data.id,
+          title: data.title,
+          image: `data:image/jpeg;base64,${data.image}`,
+          author: data.author,
+          press: data.press,
+          runningTime: data.runningTime,
+          intro: data.intro,
+        };
+        setBookInfo(bookData);
       })
       .catch((error) => console.error("Error: ", error));
-  }, []);
+  }, [bookId]);
 
   const onClickProduction = async () => {
     const { user } = useAuth();
     const body = { bookId: bookInfo.id, userId: user.userId };
     try {
-      const urlWithBookId = `${AUDIOBOOK_PRODUCTION_SERVER_URL}?id=${bookInfo.id}`;
-      await fetch(urlWithBookId, {
+      const response = await fetch(AUDIOBOOK_PRODUCTION_SERVER_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(body),
+        //TODO : 구현위해 리터럴하게 선언.
+        body: JSON.stringify({ bookId: bookInfo.id, userId: 1 }),
       });
-      navigate("/production-progrss");
+      if (response.ok) {
+        navigate(`/audiobook-player?userId=${userId}&bookId=${bookInfo.id}`);
+      } else {
+        console.error("Error sending data: ", response.statusText);
+      }
     } catch (error) {
       console.error("Error sending data: ", error);
     }
@@ -47,7 +65,7 @@ export default function P_Book_Detail() {
         <>
           <div className="top-container">
             <div className="top-left-container">
-              <img src={bookImage} className="detail-bookimg"></img>
+              <img src={bookInfo.image} className="detail-bookimg" alt={bookInfo.title}></img>
             </div>
             <div className="top-right-container">
               <div className="content-container">
@@ -58,7 +76,7 @@ export default function P_Book_Detail() {
                   <Title_Lv2>{bookInfo.author + " / " + bookInfo.press}</Title_Lv2>
                 </div>
                 <div className="running-time">
-                  <Text_Lv3>예상 소요시간: {bookInfo.runningTime}분</Text_Lv3>
+                  <Text_Lv3>예상 ���요시간: {bookInfo.runningTime}분</Text_Lv3>
                 </div>
                 <div className="intro">
                   <Title_Lv2>개요</Title_Lv2>
@@ -73,15 +91,14 @@ export default function P_Book_Detail() {
               </div>
             </div>
           </div>
-          <div className="bottom-container">
+          {/*<div className="bottom-container">
             <div>목차</div>
             <ul>
-              {console.log(bookInfo.contents)}
               {bookInfo.contents.map((content) => (
-                <li>{content}</li>
+                <li key={content}>{content}</li>
               ))}
             </ul>
-          </div>
+          </div>*/}
         </>
       ) : (
         <p>Loading...</p>

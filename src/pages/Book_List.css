@@ -6,8 +6,7 @@
 }
 
 .container-booklist {
-  display:grid;
-  /* grid-template-columns: 200px 200px 500px; */
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   justify-items: center;
@@ -24,14 +23,16 @@
   align-content: space-between;
 }
 
+.item-book img {
+  width: 300px;
+}
+
 .book-title {
   font-size: 3rem;
   font-weight: 600;
-  /* padding: 10px 0; */
 }
 
-.author, running-time {
+.author, .running-time {
   font-size: 1.5rem;
   font-weight: 600;
-  /* padding: 5px 0; */
 }
