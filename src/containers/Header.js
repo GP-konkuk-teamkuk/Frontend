@@ -1,6 +1,5 @@
 import { HomePageContext, useAuth } from "components/Context";
 import "./Header.css";
-import { Btn_Lv2_Empty } from "components/Component";
 import logo from "logo.png";
 // logo.png 가로 x 세로: 426 x 140
 import logo_without_text from "logo_without_text.png";
@@ -46,15 +45,15 @@ export default function Header() {
   return (
     <header>
       <Logo />
-      {user ? (
+      {user.id !== "" ? (
         <div className="user-info">
           <span className="user-nickname">{user.nickname}</span>
-          <button className="btn-lv2 btn-lv2-empty" onClick={onClickLogout}>
+          <button className="btn-lv2 btn-lv2-empty margin-right-1rem" onClick={onClickLogout}>
             로그아웃
           </button>
         </div>
       ) : (
-        <button className="btn-lv2 btn-lv2-empty" onClick={onClickLogin}>
+        <button className="btn-lv2 btn-lv2-empty margin-right-1rem" onClick={onClickLogin}>
           로그인
         </button>
       )}

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import "./Book_Detail.css";
 import bookImage from "bookImage.png";
-import { Btn_Lv2_Empty, Btn_Lv2_Full, Title_Lv1, Title_Lv2, Text_Lv3 } from "components/Component";
+import { Title_Lv1, Title_Lv2, Text_Lv3 } from "components/Component";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "components/Context";
 
 export default function P_Book_Detail() {
   const [bookInfo, setBookInfo] = useState();
@@ -10,7 +11,9 @@ export default function P_Book_Detail() {
   const AUDIOBOOK_PRODUCTION_SERVER_URL = "";
 
   useEffect(() => {
-    fetch("http://localhost:3001/detailInfos?id=2")
+    const urlWithBookId = `${AUDIOBOOK_PRODUCTION_SERVER_URL}?id=${bookInfo.id}`;
+
+    fetch(urlWithBookId)
       .then((res) => {
         return res.json();
       })
@@ -20,11 +23,17 @@ export default function P_Book_Detail() {
       .catch((error) => console.error("Error: ", error));
   }, []);
 
-  const handleOnClick = async () => {
+  const onClickProduction = async () => {
+    const { user } = useAuth();
+    const body = { bookId: bookInfo.id, userId: user.userId };
     try {
-      const urlWithId = `${AUDIOBOOK_PRODUCTION_SERVER_URL}?id=${bookInfo.id}`;
-      await fetch(urlWithId, {
-        method: "GET",
+      const urlWithBookId = `${AUDIOBOOK_PRODUCTION_SERVER_URL}?id=${bookInfo.id}`;
+      await fetch(urlWithBookId, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
       });
       navigate("/production-progrss");
     } catch (error) {
@@ -57,8 +66,10 @@ export default function P_Book_Detail() {
                 </div>
               </div>
               <div className="button-container">
-                <Btn_Lv2_Empty>돌아가기</Btn_Lv2_Empty>
-                <Btn_Lv2_Full onClick={handleOnClick}>제작</Btn_Lv2_Full>
+                <button className="btn-lv2 btn-lv2-empty">돌아가기</button>
+                <button className="btn-lv2 btn-lv2-full" onClick={onClickProduction}>
+                  제작
+                </button>
               </div>
             </div>
           </div>

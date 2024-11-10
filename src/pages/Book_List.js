@@ -1,7 +1,7 @@
-import { Msg_Lv1 } from "components/Component";
 import "./Book_List.css";
 import bookImage from "bookImage.png";
 import { useEffect, useState } from "react";
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 function BookList({ bookInfos }) {
   return (
@@ -29,8 +29,8 @@ function BookList({ bookInfos }) {
 
 export default function P_Book_List() {
   const [page, setPage] = useState(1);
-  const URL = "http://localhost:3001/generalInfos";
-  const [url, setURL] = useState(URL);
+  const [numOfBooks, setNumOfBook] = useState(3);
+  const [apiUrl, setApiUrl] = useState(`${SERVER_URL}?page=${page}&limit=${numOfBooks}`);
 
   // 여기에서 다음과 같은 형태로 서버에 쿼리를 요청하고 책의 데이터 n개 단위로 받을 수 있으면 좋겠음.
   // http://localhost:3001/generalInfos?page=1
@@ -43,7 +43,7 @@ export default function P_Book_List() {
   const [generalInfos, setGeneralInfos] = useState();
 
   useEffect(() => {
-    fetch(url)
+    fetch(apiUrl)
       .then((res) => {
         return res.json();
       })
@@ -51,14 +51,14 @@ export default function P_Book_List() {
         setGeneralInfos(data);
       })
       .catch((error) => console.error("Error: ", error));
-  }, [url, page]);
+  }, [apiUrl, page]);
 
   const handleClickNextPage = () => {};
 
   return (
     <>
       <div className="container-p-bl-msg-lv1">
-        <Msg_Lv1 text={"듣고 싶은 책을 골라주세요"}></Msg_Lv1>
+        <div className="msg-lv1">듣고 싶은 책을 골라주세요</div>
       </div>
       <div className="container-booklist">
         {generalInfos ? <BookList bookInfos={generalInfos} /> : <p>Loading...</p>}

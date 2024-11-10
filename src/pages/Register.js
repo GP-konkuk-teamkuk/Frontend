@@ -3,6 +3,7 @@ import "./Register.css";
 import { HomePageContext, useAuth } from "components/Context";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 export function F_Login() {
   const { homePage, setHomePage } = useContext(HomePageContext);
@@ -16,7 +17,11 @@ export function F_Login() {
     event.preventDefault();
 
     const success = await login(userId, userPw);
+
     if (success) {
+      // 서버 연동 O
+      // if (true) {
+      // 서버 연동 X(테스트)
       setHomePage("home");
       navigate("/voice-upload");
     } else {
@@ -81,7 +86,7 @@ export default function F_Register() {
 
   const onSubemitRegister = async (event) => {
     event.preventDefault();
-    const userData = { nickname, userId, userPw };
+    const userData = { nickname: nickname, id: userId, pw: userPw };
 
     try {
       const result = await registerUser(userData);

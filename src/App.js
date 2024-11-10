@@ -11,6 +11,7 @@ import P_Book_Detail from "pages/Book_Detail";
 import P_Production_Progress from "pages/Production_Progress";
 import Layout from "containers/Layout";
 import P_Register from "pages/Register";
+import P_Production_Complete from "pages/Production_Complete";
 
 function App() {
   const [homePage, setHomePage] = useState("home");
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/book-list" element={<P_Book_List />} />
                 <Route path="/book-detail" element={<P_Book_Detail />} />
                 <Route path="production-progress" element={<P_Production_Progress />} />
+                <Route path="production-complete" element={<P_Production_Complete />} />
                 <Route path="/audiobook-player" element={<P_Audiobook_Player />} />
               </Route>
             </Routes>

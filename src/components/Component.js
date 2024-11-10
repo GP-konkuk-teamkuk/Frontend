@@ -1,46 +1,5 @@
 import "./Component.css";
 
-export function Msg_Lv1({ children }) {
-  return <div className="msg_lv1">{children}</div>;
-}
-
-export function Msg_Lv2({ children }) {
-  return <div className="msg_lv2">{children}</div>;
-}
-
-export function Btn_Lv1({ text, onClick, children }) {
-  return (
-    <button className="btn_lv1" onClick={onClick}>
-      {children === undefined ? text : children}
-    </button>
-  );
-}
-
-export function Btn_Lv2_Empty({ text, onClick, children }) {
-  return (
-    <button className="btn-lv2 btn-lv2-empty" onClick={onClick}>
-      {children === undefined ? text : children}
-    </button>
-  );
-}
-
-export function Btn_Lv2_Full({ text, onClick, children }) {
-  return (
-    <button className="btn-lv2 btn-lv2-full" onClick={onClick}>
-      {children === undefined ? text : children}
-    </button>
-  );
-}
-
-export function Div_Align_Center({ children }) {
-  const style = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  };
-  return <div style={style}>{children}</div>;
-}
-
 export function Dummy_Rectangle() {
   const style = {
     width: "50px",
@@ -63,10 +22,10 @@ export const Text_Lv3 = ({ children }) => {
 export function Wait_and_Complete({ icon, msgLv2Text }) {
   return (
     <>
-      <Div_Align_Center>{icon}</Div_Align_Center>
-      <Div_Align_Center>
-        <Msg_Lv2>{msgLv2Text}</Msg_Lv2>
-      </Div_Align_Center>
+      <div className="flex-center">{icon}</div>
+      <div className="flex-center">
+        <div className="msg-lv2">{msgLv2Text}</div>
+      </div>
     </>
   );
 }
