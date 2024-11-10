@@ -26,7 +26,8 @@ function App() {
                 <Route path="/" element={<P_Main />} />
                 <Route path="/register" element={<P_Register />} />
                 <Route path="/voice-upload" element={<P_Voice_Upload />} />
-                <Route path="/voice-encoding" element={<P_Voice_Encoding />} />
+                {/* <Route path="/voice-encoding" element={<P_Voice_Encoding />} /> */} // 2차 발표
+                이후 UX 개선 시 구현
                 <Route path="/book-list" element={<P_Book_List />} />
                 <Route path="/book-detail" element={<P_Book_Detail />} />
                 <Route path="production-progress" element={<P_Production_Progress />} />

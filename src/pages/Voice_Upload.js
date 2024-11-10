@@ -26,11 +26,6 @@ export default function P_Voice_Upload() {
     }
   };
 
-  // 버튼 클릭 시 파일 선택 창 열기
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
-
   // 폼 제출 핸들러
   const handleSubmit = async () => {
     if (!file) {
@@ -48,7 +43,7 @@ export default function P_Voice_Upload() {
         method: "POST",
         body: formData,
       });
-      navigate("/voice-encoding");
+      // navigate("/voice-encoding"); // 2차 발표 이후 UX 개선 시 구현
 
       // 응답을 받을 수 있을 때 주석 해제.
       // ok면 페이지를 넘어갈 거라면, 파일에 문제가 있을 때는 어떻게 처리?

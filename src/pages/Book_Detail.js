@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./Book_Detail.css";
 import bookImage from "bookImage.png";
 import { Title_Lv1, Title_Lv2, Text_Lv3 } from "components/Component";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "components/Context";
 
 export default function P_Book_Detail() {
