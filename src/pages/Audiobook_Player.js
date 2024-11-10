@@ -53,6 +53,19 @@ export default function P_Audiobook_Player() {
     }
   };
 
+  const handleStop = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  };
+
+  const handleVolumeChange = (event) => {
+    if (audioRef.current) {
+      audioRef.current.volume = event.target.value;
+    }
+  };
+
   return (
     <>
       <div className="textbook-container">
@@ -74,8 +87,18 @@ export default function P_Audiobook_Player() {
         <button className="icon-button" onClick={handlePause}>
           <img src={pause} alt="pause" className="pause-icon" />
         </button>
+        <button className="icon-button" onClick={handleStop}>
+          Stop
+        </button>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          onChange={handleVolumeChange}
+        />
         <div className="progressbar-background"></div>
-        {audioSrc && <audio ref={audioRef} src={audioSrc} />}
+        {audioSrc && <audio ref={audioRef} src={audioSrc} controls />}
       </div>
     </>
   );

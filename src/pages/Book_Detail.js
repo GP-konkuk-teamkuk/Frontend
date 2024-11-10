@@ -11,7 +11,7 @@ export default function P_Book_Detail() {
 
   const queryParams = new URLSearchParams(location.search);
   const bookId = queryParams.get("bookId");
-  const userId = "exampleUserId"; // Replace with actual user ID
+  const userId = "1"; // TODO : replace userid
 
   useEffect(() => {
     fetch(`http://localhost:3001/api/book/detail?bookId=${bookId}`)
@@ -20,7 +20,16 @@ export default function P_Book_Detail() {
         return json;
       })
       .then((data) => {
-        setBookInfo(data);
+        const bookData = {
+          id: data.id,
+          title: data.title,
+          image: `data:image/jpeg;base64,${data.image}`,
+          author: data.author,
+          press: data.press,
+          runningTime: data.runningTime,
+          intro: data.intro,
+        };
+        setBookInfo(bookData);
       })
       .catch((error) => console.error("Error: ", error));
   }, [bookId]);
@@ -32,7 +41,8 @@ export default function P_Book_Detail() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ bookId: bookInfo.id, userId: userId }),
+        //TODO : 구현위해 리터럴하게 선언.
+        body: JSON.stringify({ bookId: bookInfo.id, userId: 1 }),
       });
       if (response.ok) {
         navigate(`/audiobook-player?userId=${userId}&bookId=${bookInfo.id}`);
@@ -61,7 +71,7 @@ export default function P_Book_Detail() {
                   <Title_Lv2>{bookInfo.author + " / " + bookInfo.press}</Title_Lv2>
                 </div>
                 <div className="running-time">
-                  <Text_Lv3>예상 소요시간: {bookInfo.runningTime}분</Text_Lv3>
+                  <Text_Lv3>예상 ���요시간: {bookInfo.runningTime}분</Text_Lv3>
                 </div>
                 <div className="intro">
                   <Title_Lv2>개요</Title_Lv2>
