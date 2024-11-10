@@ -14,12 +14,26 @@ export function F_Login() {
   const onSubmitLogin = async (event) => {
     event.preventDefault();
 
-    const success = await login(userId, userPw);
-    if (success) {
-      setHomePage("home");
-      navigate("/voice-upload");
-    } else {
-      setErrorMessage("로그인 실패: 올바른 ID와 PW를 입력하세요.");
+    try {
+      const response = await fetch("http://localhost:3001/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: userId, pw: userPw }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        login(data.token); 
+        setHomePage("home");
+        navigate("/voice-upload");
+      } else {
+        setErrorMessage("로그인 실패: 올바른 ID와 PW를 입력하세요.");
+      }
+    } catch (error) {
+      console.error("로그인 에러: ", error);
+      setErrorMessage("로그인 실패: 서버 오류가 발생했습니다.");
     }
   };
 
@@ -37,7 +51,7 @@ export function F_Login() {
       <div className="item-container userPw-container">
         <span className="">PW</span>
         <input
-          type="text"
+          type="password"
           placeholder="PW"
           value={userPw}
           onChange={(e) => setUserPw(e.target.value)}
@@ -117,7 +131,7 @@ export default function F_Register() {
       <div className="item-container pw-container">
         <span className="">PW</span>
         <input
-          type="text"
+          type="password"
           placeholder="PW"
           value={userPw}
           onChange={(e) => setUserPw(e.target.value)}

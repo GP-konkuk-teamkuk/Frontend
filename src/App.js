@@ -28,7 +28,7 @@ function App() {
                 <Route path="/voice-encoding" element={<P_Voice_Encoding />} />
                 <Route path="/book-list" element={<P_Book_List />} />
                 <Route path="/book-detail" element={<P_Book_Detail />} />
-                <Route path="production-progress" element={<P_Production_Progress />} />
+                <Route path="/production-progress" element={<P_Production_Progress />} />
                 <Route path="/audiobook-player" element={<P_Audiobook_Player />} />
               </Route>
             </Routes>
