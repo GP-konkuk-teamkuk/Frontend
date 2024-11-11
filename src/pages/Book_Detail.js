@@ -3,9 +3,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./Book_Detail.css";
 import { Title_Lv1, Title_Lv2, Text_Lv3 } from "components/Component";
 import { useAuth } from "components/Context";
+import test_bookInfo from "../database/bookinfo.json"; // 테스트 (서버 연동 X)
+import testImage from "../database/testImage.png"; // 테스트 (서버 연동 X)
 
 export default function P_Book_Detail() {
-  const [bookInfo, setBookInfo] = useState();
+  const [bookInfo, setBookInfo] = useState(test_bookInfo.detailInfos[0]);
   const navigate = useNavigate();
   const location = useLocation();
   const AUDIOBOOK_PRODUCTION_SERVER_URL = "http://localhost:3001/api/audio";
@@ -56,6 +58,7 @@ export default function P_Book_Detail() {
       console.error("Error sending data: ", error);
     }
   };
+  console.log(bookInfo);
 
   return (
     <div className="book-detail-container flex-center">
@@ -63,10 +66,13 @@ export default function P_Book_Detail() {
         <>
           <div className="top-container">
             <div className="top-left-container">
-              <img src={bookInfo.image} className="detail-bookimg" alt={bookInfo.title}></img>
+              {/* <img src={bookInfo.image} className="detail-bookimg" alt={bookInfo.title}></img> */}
+              {/* 서버 연동 O */}
+              <img src={testImage} className="detail-bookimg" alt={bookInfo.title}></img>
+              {/* 테스트 (서버 연동 X) */}
             </div>
             <div className="top-right-container">
-              <div className="content-container">
+              <div className="book-content-container">
                 <div className="book-title">
                   <Title_Lv1>{bookInfo.title}</Title_Lv1>
                 </div>
@@ -74,7 +80,7 @@ export default function P_Book_Detail() {
                   <Title_Lv2>{bookInfo.author + " / " + bookInfo.press}</Title_Lv2>
                 </div>
                 <div className="running-time">
-                  <Text_Lv3>예상 ���요시간: {bookInfo.runningTime}분</Text_Lv3>
+                  <Text_Lv3>예상 소요시간: {bookInfo.runningTime}분</Text_Lv3>
                 </div>
                 <div className="intro">
                   <Title_Lv2>개요</Title_Lv2>

@@ -1,8 +1,8 @@
 import "./Book_List.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import bookInfo from "../database/bookinfo.json";
-import testImage from "../database/testImage.png";
+import bookInfo from "../database/bookinfo.json"; // 테스트 (서버 연동 X)
+import testImage from "../database/testImage.png"; // 테스트 (서버 연동 X)
 
 function BookList({ bookInfos }) {
   return (
