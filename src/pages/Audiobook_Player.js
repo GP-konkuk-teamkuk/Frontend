@@ -70,7 +70,7 @@ export default function P_Audiobook_Player() {
     <>
       <div className="textbook-container">
         <div className="textbook-frame">
-          <div className="textbook-content">
+          <div className="textbook-content loading-text">
             {bookInfo ? bookInfo.title : "Loading..."}
           </div>
           <span className="textbook-pagenum">100</span>
@@ -90,13 +90,7 @@ export default function P_Audiobook_Player() {
         <button className="icon-button" onClick={handleStop}>
           Stop
         </button>
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.01"
-          onChange={handleVolumeChange}
-        />
+        <input type="range" min="0" max="1" step="0.01" onChange={handleVolumeChange} />
         <div className="progressbar-background"></div>
         {audioSrc && <audio ref={audioRef} src={audioSrc} controls />}
       </div>

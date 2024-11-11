@@ -1,15 +1,21 @@
 .register-form {
 }
 .item-container {
-  margin: 0.5rem auto;
+  margin: 1rem auto;
+  display: flex;
+  align-items: center;
 }
 
 .item-container span {
   display: inline-block;
   width: 5rem;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
   text-align: left;
   color: #756AB6;
 }
-.register-form button {
-  margin: 3rem;
+.item-container input {
+  width: 20rem;
+  height: 2rem;
 }

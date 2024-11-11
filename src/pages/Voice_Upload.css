@@ -22,6 +22,10 @@ label.file-upload {
 }
 .file-info-container h3 {
   margin-bottom: 0;
+  color:#756AB6;
+}
+.file-info-container {
+  text-align: left;
 }
 .btn-submit {
   margin: 1rem 0;

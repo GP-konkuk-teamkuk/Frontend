@@ -31,16 +31,28 @@ export default function P_Home() {
   return (
     <div className={`main-container`}>
       <div
-        className={`flex-center main-section section1 ${homePage !== "home" ? "translate-y" : ""}`}
+        className={`flex-center main-section section1 min-height-9rem ${
+          homePage !== "home"
+            ? {
+                /*"translate-y"*/
+              }
+            : ""
+        }`}
       >
         <div className="msg-lv1">나만의 목소리로 만드는 커스텀 오디오북</div>
       </div>
       <div
-        className={`flex-center main-section section2 ${homePage !== "home" ? "translate-y" : ""}`}
+        className={`flex-center main-section section2 min-height-9rem ${
+          homePage !== "home"
+            ? {
+                /*"translate-y"*/
+              }
+            : ""
+        }`}
       >
         <LogoText />
       </div>
-      <div className={`flex-center main-section section3`}>{renderContent()}</div>
+      <div className={`flex-center main-section section3 min-height-9rem`}>{renderContent()}</div>
     </div>
   );
 }

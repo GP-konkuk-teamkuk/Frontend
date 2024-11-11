@@ -18,9 +18,11 @@ img.logo {
 header {
   height: 5rem;
   width: 100%;
-
-  /* background-color: #999999; */
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.user-info {
+  display: flex;
   align-items: center;
 }

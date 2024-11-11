@@ -15,6 +15,8 @@ import P_Production_Complete from "pages/Production_Complete";
 
 function App() {
   const [homePage, setHomePage] = useState("home");
+  // const [homePage, setHomePage] = useState("register");
+  // const [homePage, setHomePage] = useState("login");
 
   return (
     <BrowserRouter>

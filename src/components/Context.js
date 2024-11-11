@@ -12,7 +12,9 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 }
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({ userId: "", id: "", nickname: "" });
+  // const [user, setUser] = useState({ userId: "", id: "", nickname: "" });
+  const [user, setUser] = useState({ userId: 1, id: "black7321", nickname: "s-prel" }); // 테스트용
+  // userId: 서버 기준 id / id: 사용자 관점 id
   const login = async (id, pw) => {
     try {
       const response = await axios.post(

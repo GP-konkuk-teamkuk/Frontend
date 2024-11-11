@@ -14,9 +14,8 @@ export default function P_Voice_Upload() {
   // 파일 선택 핸들러
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
-    const validTypes = ["audio/x-m4a", "audio/wav"];
+    const validTypes = ["audio/x-m4a", "audio/wav", "audio/mpeg"];
 
-    console.log(selectedFile.type);
     if (selectedFile && validTypes.includes(selectedFile.type)) {
       setFile(selectedFile);
       setErrorMessage("");
@@ -36,7 +35,9 @@ export default function P_Voice_Upload() {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("userId", user.userId);
-    console.log(formData);
+    // for (let [key, value] of formData.entries()) {  //테스트 - formData 내용 확인
+    //   console.log(`${key}:`, value);
+    // }
 
     try {
       const response = fetch(SERVER_URL_FOR_UPLOAD, {
@@ -45,21 +46,20 @@ export default function P_Voice_Upload() {
       });
       // navigate("/voice-encoding"); // 2차 발표 이후 UX 개선 시 구현
 
-      // 응답을 받을 수 있을 때 주석 해제.
-      // ok면 페이지를 넘어갈 거라면, 파일에 문제가 있을 때는 어떻게 처리?
       if (!(await response).ok) {
         throw new Error("파일 업로드 실패");
       }
       navigate("/book-list");
     } catch (error) {
       alert("업로드 실패! 다시 시도하세요.", error);
+      setFile(null); // 파일 선택 초기화
       console.error("업로드 오류: ", error);
     }
   };
 
   return (
     <div className="voice-upload-container">
-      <div className="flex-center">
+      <div className="flex-center min-height-9rem">
         <div className="msg-lv1">당신이 오디오로 듣고 싶은 목소리를 들려주세요</div>
       </div>
       <div className="button-container">
@@ -76,10 +76,11 @@ export default function P_Voice_Upload() {
         />
         {file && (
           <div className="file-info-container">
-            <h3>선택된 파일 정보:</h3>
+            <h3>선택된 파일 정보</h3>
             <p>이름: {file.name}</p>
             <p>유형: {file.type}</p>
-            <p>크기: {file.size} bytes</p>
+            {/* <p>크기: {file.size} bytes</p> */}
+            <p>크기: {(file.size / 1024 / 1024).toFixed(2)} MB</p>
           </div>
         )}
         <button className="btn-lv2 btn-submit" onClick={handleSubmit}>

@@ -43,7 +43,7 @@ export function F_Login() {
         <span className="">ID</span>
         <input
           type="text"
-          placeholder="ID"
+          placeholder=""
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
         ></input>
@@ -52,13 +52,13 @@ export function F_Login() {
         <span className="">PW</span>
         <input
           type="password"
-          placeholder="PW"
+          placeholder=""
           value={userPw}
           onChange={(e) => setUserPw(e.target.value)}
         ></input>
       </div>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
-      <button type="submit" className="btn-lv2 btn-lv2-full">
+      <button type="submit" className="btn-lv2 btn-lv2-full margin-3rem">
         로그인
       </button>
     </form>
@@ -114,7 +114,7 @@ export default function F_Register() {
         <span className="">닉네임</span>
         <input
           type="text"
-          placeholder="닉네임"
+          placeholder=""
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
         ></input>
@@ -123,7 +123,7 @@ export default function F_Register() {
         <span className="">ID</span>
         <input
           type="text"
-          placeholder="ID"
+          placeholder=""
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
         ></input>
@@ -132,12 +132,12 @@ export default function F_Register() {
         <span className="">PW</span>
         <input
           type="password"
-          placeholder="PW"
+          placeholder=""
           value={userPw}
           onChange={(e) => setUserPw(e.target.value)}
         ></input>
       </div>
-      <button type="submit" className="btn-lv2 btn-lv2-full">
+      <button type="submit" className="btn-lv2 btn-lv2-full margin-3rem">
         회원가입
       </button>
     </form>

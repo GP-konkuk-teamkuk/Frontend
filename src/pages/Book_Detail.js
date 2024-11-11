@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Book_Detail.css";
-import bookImage from "bookImage.png";
 import { Title_Lv1, Title_Lv2, Text_Lv3 } from "components/Component";
 import { useAuth } from "components/Context";
 
@@ -59,7 +58,7 @@ export default function P_Book_Detail() {
   };
 
   return (
-    <div className="container">
+    <div className="book-detail-container flex-center">
       {bookInfo ? (
         <>
           <div className="top-container">
@@ -100,7 +99,7 @@ export default function P_Book_Detail() {
           </div>*/}
         </>
       ) : (
-        <p>Loading...</p>
+        <p className="loading-text">Loading...</p>
       )}
     </div>
   );
