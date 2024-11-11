@@ -15,7 +15,6 @@ export default function P_Book_Detail() {
   const { user } = useAuth();
   const queryParams = new URLSearchParams(location.search);
   const bookId = queryParams.get("bookId");
-  const userId = "1"; // TODO : replace userid
 
   useEffect(() => {
     fetch(`http://localhost:3001/api/book/detail?bookId=${bookId}`)
@@ -53,7 +52,7 @@ export default function P_Book_Detail() {
         body: JSON.stringify({ bookId: bookInfo.id, userId: user.userId }),
       });
       if (response.ok) {
-        navigate(`/audiobook-player?userId=${userId}&bookId=${bookInfo.id}`);
+        navigate(`/audiobook-player?userId=${user.userId}&bookId=${bookInfo.id}`);
       } else {
         console.error("Error sending data: ", response.statusText);
       }

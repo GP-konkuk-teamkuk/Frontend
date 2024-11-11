@@ -26,6 +26,10 @@ export default function P_Audiobook_Player() {
           id: data.id,
           title: data.title,
           image: `data:image/jpeg;base64,${data.image}`,
+          author: data.author,
+          press: data.press,
+          runningTime: data.runningTime,
+          intro: data.intro,
         };
         setBookInfo(bookData);
       })
@@ -72,7 +76,7 @@ export default function P_Audiobook_Player() {
       <div className="textbook-container">
         <div className="textbook-frame">
           <div className="textbook-content loading-text">
-            {bookInfo ? bookInfo.title : "Loading..."}
+            {bookInfo ? bookInfo.intro : "Loading..."}
           </div>
           <span className="textbook-pagenum pagenum-left">1</span>
         </div>
@@ -97,7 +101,7 @@ export default function P_Audiobook_Player() {
           max="1"
           step="0.01"
           onChange={handleVolumeChange}
-          className="progress-bar"
+          className="volume-bar"
         />
         {/* <div className="progressbar-background"></div> */}
         {audioSrc && <audio ref={audioRef} src={audioSrc} controls />}
