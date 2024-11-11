@@ -7,8 +7,8 @@ import test_bookInfo from "../database/bookinfo.json"; // 테스트 (서버 연�
 import testImage from "../database/testImage.png"; // 테스트 (서버 연동 X)
 
 export default function P_Book_Detail() {
-  const [bookInfo, setBookInfo] = useState(test_bookInfo.detailInfos[0]); //테스트 (서버 연동 X)
-  // const [bookInfo, setBookInfo] = useState(null); //테스트 (서버 연동 X)
+  // const [bookInfo, setBookInfo] = useState(test_bookInfo.detailInfos[0]); //테스트 (서버 연동 X)
+  const [bookInfo, setBookInfo] = useState(null); //테스트 (서버 연동 X)
   const navigate = useNavigate();
   const location = useLocation();
   const AUDIOBOOK_PRODUCTION_SERVER_URL = "http://localhost:3001/api/audio";
@@ -68,9 +68,9 @@ export default function P_Book_Detail() {
     <div className="book-detail-container ">
       <div className="top-container">
         <div className="top-left-container">
-          {/* <img src={bookInfo.image} className="detail-bookimg" alt={bookInfo.title}></img> */}
-          {/* 서버 연동 O */}
-          <img src={testImage} className="detail-bookimg" alt={bookInfo.title}></img>
+          <img src={bookInfo.image} className="detail-bookimg" alt={bookInfo.title}></img>
+          {/* 테스트 (서버 연동 O) */}
+          {/* <img src={testImage} className="detail-bookimg" alt={bookInfo.title}></img> */}
           {/* 테스트 (서버 연동 X) */}
         </div>
         <div className="top-right-container">

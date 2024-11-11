@@ -27,8 +27,8 @@ export default function P_Book_List() {
   const limit = 10;
   const URL = "http://localhost:3001/api/book";
   const [url, setURL] = useState(`${URL}?page=${page}&limit=${limit}`);
-  // const [bookInfos, setBookInfos] = useState(); // 서버 연동 O
-  const [bookInfos, setBookInfos] = useState(bookInfo.generalInfos); // 테스트(서버 연동 X)
+  const [bookInfos, setBookInfos] = useState(); // 서버 연동 O
+  // const [bookInfos, setBookInfos] = useState(bookInfo.generalInfos); // 테스트(서버 연동 X)
   // const [bookInfos, setBookInfos] = useState(null); // 테스트(서버 연동 X)
 
   useEffect(() => {
@@ -87,9 +87,9 @@ function BookItem({ id, title, author, runningTime, image }) {
 
   return (
     <div className="item-book" onClick={handleClick}>
-      {/* <img src={image} alt={title}></img> */}
+      <img src={image} alt={title}></img>
       {/* 서버 연동 O */}
-      <img src={testImage} alt={title}></img>
+      {/* <img src={testImage} alt={title}></img> */}
       {/* 테스트 (서버 연동 X) */}
       <div className="book-title">{title}</div>
       <div className="author">{author}</div>
