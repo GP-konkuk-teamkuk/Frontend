@@ -43,7 +43,6 @@ export default function P_Book_Detail() {
   };
 
   const onClickProduction = async () => {
-    const body = { bookId: bookInfo.id, userId: user.userId };
     try {
       const response = await fetch(AUDIOBOOK_PRODUCTION_SERVER_URL, {
         method: "POST",
@@ -100,14 +99,15 @@ export default function P_Book_Detail() {
       </div>
       <div className="bottom-container">
         <div className="contents-container">
-          <div className="title-lv2">목차</div>
+          {/* 서버에서 제공하는 책 정보에서, 목차 항목이 추가되었을 때 적용 */}
+          {/* <div className="title-lv2">목차</div>
           <ul className="contents-ul">
             {bookInfo.contents.map((content) => (
               <li key={content} className="text-lv3 contents-li">
                 {content}
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
     </div>

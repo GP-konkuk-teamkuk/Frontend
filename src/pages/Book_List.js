@@ -23,7 +23,7 @@ function BookList({ bookInfos }) {
 }
 
 export default function P_Book_List() {
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
   const limit = 10;
   const URL = "http://localhost:3001/api/book";
   const [url, setURL] = useState(`${URL}?page=${page}&limit=${limit}`);

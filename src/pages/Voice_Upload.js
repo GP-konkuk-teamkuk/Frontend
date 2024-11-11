@@ -21,7 +21,7 @@ export default function P_Voice_Upload() {
       setErrorMessage("");
     } else {
       setFile(null);
-      setErrorMessage("음성 파일(m4a, wav)만 업로드할 수 있습니다.");
+      setErrorMessage("음성 파일(m4a, wav, mpeg)만 업로드할 수 있습니다.");
     }
   };
 

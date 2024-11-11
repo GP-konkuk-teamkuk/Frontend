@@ -9,10 +9,12 @@ export default function P_Production_Progress() {
   };
   return (
     <>
-      <Wait_and_Complete
-        icon={<img src={spinner} style={imgStyle}></img>}
-        msgLv2Text={"당신의 목소리로 책을 만들고 있어요"}
-      ></Wait_and_Complete>
+      <div className="flex-center">
+        <Wait_and_Complete
+          icon={<img src={spinner} style={imgStyle}></img>}
+          msgLv2Text={"당신의 목소리로 책을 만들고 있어요"}
+        ></Wait_and_Complete>
+      </div>
     </>
   );
 }

@@ -32,8 +32,8 @@ function App() {
                 이후 UX 개선 시 구현
                 <Route path="/book-list" element={<P_Book_List />} />
                 <Route path="/book-detail" element={<P_Book_Detail />} />
-                <Route path="production-progress" element={<P_Production_Progress />} />
-                <Route path="production-complete" element={<P_Production_Complete />} />
+                <Route path="/production-progress" element={<P_Production_Progress />} />
+                <Route path="/production-complete" element={<P_Production_Complete />} />
                 <Route path="/audiobook-player" element={<P_Audiobook_Player />} />
               </Route>
             </Routes>

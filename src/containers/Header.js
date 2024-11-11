@@ -39,6 +39,7 @@ export default function Header() {
 
   const onClickLogout = async () => {
     logout();
+    setHomePage("home");
     navigate("/");
   };
 

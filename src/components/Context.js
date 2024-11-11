@@ -6,11 +6,6 @@ export const HomePageContext = createContext("main");
 const AuthContext = createContext();
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-// userId, userPw // bookId
-{
-  id: [{ 1: "black7321" }];
-}
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({ userId: "", id: "", nickname: "" });
   // const [user, setUser] = useState({ userId: 1, id: "black7321", nickname: "s-prel" }); // 테스트용
@@ -39,6 +34,7 @@ export const AuthProvider = ({ children }) => {
       await axios.post("http://localhost:3001/api/logout", {}, { withCredentials: true });
       setUser({ userId: "", id: "", nickname: "" });
     } catch (error) {
+      alert("로그아웃 실패");
       console.error("Logout error: ", error);
     }
   };
