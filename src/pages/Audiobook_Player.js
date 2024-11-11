@@ -1,6 +1,7 @@
 import "./Audiobook_Player.css";
 import play from "../icons/play.svg";
 import pause from "../icons/pause.svg";
+import stop from "../icons/stop.svg";
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -67,17 +68,17 @@ export default function P_Audiobook_Player() {
   };
 
   return (
-    <>
+    <div className="audiobook-player-container">
       <div className="textbook-container">
         <div className="textbook-frame">
           <div className="textbook-content loading-text">
             {bookInfo ? bookInfo.title : "Loading..."}
           </div>
-          <span className="textbook-pagenum">100</span>
+          <span className="textbook-pagenum pagenum-left">1</span>
         </div>
         <div className="textbook-frame">
           <div className="textbook-content"></div>
-          <span className="textbook-pagenum"></span>
+          <span className="textbook-pagenum pagenum-right">2</span>
         </div>
       </div>
       <div className="playbar-container">
@@ -88,12 +89,19 @@ export default function P_Audiobook_Player() {
           <img src={pause} alt="pause" className="pause-icon" />
         </button>
         <button className="icon-button" onClick={handleStop}>
-          Stop
+          <img src={stop} alt="pause" className="pause-icon" />
         </button>
-        <input type="range" min="0" max="1" step="0.01" onChange={handleVolumeChange} />
-        <div className="progressbar-background"></div>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          onChange={handleVolumeChange}
+          className="progress-bar"
+        />
+        {/* <div className="progressbar-background"></div> */}
         {audioSrc && <audio ref={audioRef} src={audioSrc} controls />}
       </div>
-    </>
+    </div>
   );
 }
