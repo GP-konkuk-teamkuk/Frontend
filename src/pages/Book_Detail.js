@@ -12,7 +12,7 @@ export default function P_Book_Detail() {
   const navigate = useNavigate();
   const location = useLocation();
   const AUDIOBOOK_PRODUCTION_SERVER_URL = "http://localhost:3001/api/audio";
-
+  const { user } = useAuth();
   const queryParams = new URLSearchParams(location.search);
   const bookId = queryParams.get("bookId");
   const userId = "1"; // TODO : replace userid
@@ -43,7 +43,6 @@ export default function P_Book_Detail() {
   };
 
   const onClickProduction = async () => {
-    const { user } = useAuth();
     const body = { bookId: bookInfo.id, userId: user.userId };
     try {
       const response = await fetch(AUDIOBOOK_PRODUCTION_SERVER_URL, {

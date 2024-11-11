@@ -18,17 +18,16 @@ export const AuthProvider = ({ children }) => {
   const login = async (id, pw) => {
     try {
       const response = await axios.post(
-        "/api/login",
+        "http://localhost:3001/api/login",
         { id: id, pw: pw },
         { withCredentials: true }
       );
       if (response.status === 200) {
-        const data = await response.json();
-        const userId = data.userId;
-        setUser({ userId, id, nickname });
+        const { userId, id, nickname } = response.data;
+        setUser({ userId, id, nickname }); // 서버 연동 O
+        return true;
       }
-      setUser({ id: "black7321", nickname: "prel" });
-      return true;
+      // setUser({ id: "black7321", nickname: "prel" }); //테스트 (서버 연동 X)
     } catch (error) {
       console.error("Login error: ", error);
       return false;
@@ -37,8 +36,8 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post("/api/logout", {}, { withCredentials: true });
-      setUser(null);
+      await axios.post("http://localhost:3001/api/logout", {}, { withCredentials: true });
+      setUser({ userId: "", id: "", nickname: "" });
     } catch (error) {
       console.error("Logout error: ", error);
     }

@@ -14,26 +14,12 @@ export function F_Login() {
   const onSubmitLogin = async (event) => {
     event.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:3001/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id: userId, pw: userPw }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        login(data.token);
-        setHomePage("home");
-        navigate("/voice-upload");
-      } else {
-        setErrorMessage("로그인 실패: 올바른 ID와 PW를 입력하세요.");
-      }
-    } catch (error) {
-      console.error("로그인 에러: ", error);
-      setErrorMessage("로그인 실패: 서버 오류가 발생했습니다.");
+    const success = await login(userId, userPw);
+    if (success) {
+      setHomePage("home");
+      navigate("/voice-upload");
+    } else {
+      setErrorMessage("로그인 실패: 올바른 ID와 PW를 입력하세요.");
     }
   };
 
@@ -93,7 +79,7 @@ export default function F_Register() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
 
-  const onSubemitRegister = async (event) => {
+  const onSubmitRegister = async (event) => {
     event.preventDefault();
     const userData = { nickname, id: userId, pw: userPw };
 
@@ -109,7 +95,7 @@ export default function F_Register() {
   };
 
   return (
-    <form className="register-form" onSubmit={onSubemitRegister}>
+    <form className="register-form" onSubmit={onSubmitRegister}>
       <div className="item-container nickname-container">
         <span className="">닉네임</span>
         <input
