@@ -50,7 +50,7 @@ export default function Header() {
       {user.id !== "" ? (
         <div className="user-info">
           <span className="user-nickname margin-right-1rem btn-lv2-text">
-            {user.nickname} 님 환영합니다!
+            {user.nickname}님 환영합니다!
           </span>
           <button className="btn-lv2 btn-lv2-empty margin-right-1rem" onClick={onClickLogout}>
             로그아웃

@@ -5,11 +5,13 @@ import { Title_Lv1, Title_Lv2, Text_Lv3 } from "components/Component";
 import { useAuth } from "components/Context";
 import test_bookInfo from "../database/bookinfo.json"; // 테스트 (서버 연동 X)
 import testImage from "../database/testImage.png"; // 테스트 (서버 연동 X)
+import P_Production_Progress from "./Production_Progress";
 const SERVER_URL = process.env.SERVER_URL;
 
 export default function P_Book_Detail() {
   // const [bookInfo, setBookInfo] = useState(test_bookInfo.detailInfos[0]); //테스트 (서버 연동 X)
-  const [bookInfo, setBookInfo] = useState(null); //테스트 (서버 연동 X)
+  const [bookInfo, setBookInfo] = useState(null); //서버 연동 O
+  const [isProductionProgress, setIsProductionProgress] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const AUDIOBOOK_PRODUCTION_SERVER_URL = `${SERVER_URL}/api/audio`;
@@ -43,18 +45,19 @@ export default function P_Book_Detail() {
   };
 
   const onClickProduction = async () => {
-    navigate(`/production-progress`);
+    setIsProductionProgress(true);
+    console.log(user.userId);
     try {
       const response = await fetch(AUDIOBOOK_PRODUCTION_SERVER_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        //TODO : 구현위해 리터럴하게 선언.
         body: JSON.stringify({ bookId: bookInfo.id, userId: user.userId }),
       });
       if (response.ok) {
         navigate(`/audiobook-player?userId=${user.userId}&bookId=${bookInfo.id}`);
+        setIsProductionProgress(false);
       } else {
         console.error("Error sending data: ", response.statusText);
       }
@@ -62,6 +65,10 @@ export default function P_Book_Detail() {
       console.error("Error sending data: ", error);
     }
   };
+
+  if (isProductionProgress) {
+    return <P_Production_Progress></P_Production_Progress>;
+  }
 
   return bookInfo ? (
     <div className="book-detail-container ">

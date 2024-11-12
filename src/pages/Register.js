@@ -10,13 +10,14 @@ export function F_Login() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { login } = useAuth();
+  const { user, login } = useAuth();
 
   const onSubmitLogin = async (event) => {
     event.preventDefault();
 
     const success = await login(userId, userPw);
     if (success) {
+      console.log(user.userId);
       setHomePage("home");
       navigate("/voice-upload");
     } else {

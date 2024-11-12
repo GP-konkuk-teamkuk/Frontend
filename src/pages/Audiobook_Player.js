@@ -47,36 +47,36 @@ export default function P_Audiobook_Player() {
   // }, [isPlaying]);
 
   // 서버 연동 시 실행 코드
-  // useEffect(() => {
-  //   fetch(`${SERVER_URL}/api/book/detail?bookId=${bookId}`)
-  //     .then(async (res) => {
-  //       const json = await res.json();
-  //       return json;
-  //     })
-  //     .then((data) => {
-  //       const bookData = {
-  //         id: data.id,
-  //         title: data.title,
-  //         image: `data:image/jpeg;base64,${data.image}`,
-  //         author: data.author,
-  //         press: data.press,
-  //         runningTime: data.runningTime,
-  //         intro: data.intro,
-  //       };
-  //       setBookInfo(bookData);
-  //     })
-  //     .catch((error) => console.error("Error: ", error));
-  // }, [bookId]);
+  useEffect(() => {
+    fetch(`${SERVER_URL}/api/book/detail?bookId=${bookId}`)
+      .then(async (res) => {
+        const json = await res.json();
+        return json;
+      })
+      .then((data) => {
+        const bookData = {
+          id: data.id,
+          title: data.title,
+          image: `data:image/jpeg;base64,${data.image}`,
+          author: data.author,
+          press: data.press,
+          runningTime: data.runningTime,
+          intro: data.intro,
+        };
+        setBookInfo(bookData);
+      })
+      .catch((error) => console.error("Error: ", error));
+  }, [bookId]);
 
-  // useEffect(() => {
-  //   fetch(`${SERVER_URL}/api/audio?userId=${userId}&bookId=${bookId}`)
-  //     .then((res) => res.blob())
-  //     .then((blob) => {
-  //       const url = URL.createObjectURL(blob);
-  //       setAudioSrc(url);
-  //     })
-  //     .catch((error) => console.error("Error: ", error));
-  // }, [userId, bookId]);
+  useEffect(() => {
+    fetch(`${SERVER_URL}/api/audio?userId=${userId}&bookId=${bookId}`)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const url = URL.createObjectURL(blob);
+        setAudioSrc(url);
+      })
+      .catch((error) => console.error("Error: ", error));
+  }, [userId, bookId]);
 
   const togglePlayPause = () => {
     // useEffect 없을 때. 실제 구동 환경.

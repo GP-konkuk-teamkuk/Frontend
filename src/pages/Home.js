@@ -2,10 +2,13 @@ import "./Home.css";
 import { LogoText } from "containers/Header";
 import { useContext } from "react";
 import F_Register, { F_Login } from "./Register";
-import { HomePageContext } from "components/Context";
+import { HomePageContext, useAuth } from "components/Context";
+import { useNavigate } from "react-router-dom";
 
 export default function P_Home() {
   const { homePage, setHomePage } = useContext(HomePageContext);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const renderContent = () => {
     switch (homePage) {
@@ -25,7 +28,11 @@ export default function P_Home() {
   };
 
   function onClickStart() {
-    setHomePage("register");
+    if (user.userId === "") {
+      setHomePage("register");
+    } else {
+      navigate("/voice-upload");
+    }
   }
 
   return (
