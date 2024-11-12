@@ -67,7 +67,9 @@ export default function P_Book_Detail() {
   };
 
   if (isProductionProgress) {
-    return <P_Production_Progress></P_Production_Progress>;
+    return (
+      <P_Production_Progress text={"당신의 목소리로 책을 만들고 있어요"}></P_Production_Progress>
+    );
   }
 
   return bookInfo ? (

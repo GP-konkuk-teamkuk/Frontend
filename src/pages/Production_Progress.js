@@ -2,7 +2,7 @@ import { ScaleLoader } from "react-spinners";
 import "./Production_Progress.css";
 import { useEffect, useState } from "react";
 
-export default function P_Production_Progress() {
+export default function P_Production_Progress({ text }) {
   const [rootFontSize, setRootFontSize] = useState(60);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function P_Production_Progress() {
           />
         </div>
         <div className="flex-center message-container">
-          <div className="msg-lv2">당신의 목소리로 책을 만들고 있어요</div>
+          <div className="msg-lv2">{text}</div>
         </div>
       </div>
     </>

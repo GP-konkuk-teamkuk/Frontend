@@ -10,7 +10,7 @@ export default function P_Voice_Encoding() {
   return (
     <Wait_and_Complete
       icon={<img src={spinner} style={imgStyle}></img>}
-      msgLv2Text={"당신의 목소리를 듣는 중입니다"}
+      msgLv2Text={""}
     ></Wait_and_Complete>
   );
 }

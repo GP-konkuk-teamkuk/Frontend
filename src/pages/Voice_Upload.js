@@ -3,9 +3,11 @@ import "./Voice_Upload.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "components/Context";
 import { SERVER_URL } from "App";
+import P_Production_Progress from "./Production_Progress";
 
 export default function P_Voice_Upload() {
   const [file, setFile] = useState(null);
+  const [isEncodingProgress, setIsEncodingProgress] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const fileInputRef = useRef(null);
   const SERVER_URL_FOR_UPLOAD = `${SERVER_URL}/api/audio/upload`;
@@ -32,6 +34,7 @@ export default function P_Voice_Upload() {
       alert("음성 파일을 선택하세요.");
       return;
     }
+    setIsEncodingProgress(true);
 
     const formData = new FormData();
     formData.append("file", file);
@@ -45,11 +48,11 @@ export default function P_Voice_Upload() {
         method: "POST",
         body: formData,
       });
-      // navigate("/voice-encoding"); // 2차 발표 이후 UX 개선 시 구현
 
       if (!(await response).ok) {
         throw new Error("파일 업로드 실패");
       }
+      setIsEncodingProgress(false);
       navigate("/book-list");
     } catch (error) {
       alert("업로드 실패! 다시 시도하세요.", error);
@@ -57,6 +60,10 @@ export default function P_Voice_Upload() {
       console.error("업로드 오류: ", error);
     }
   };
+
+  if (isEncodingProgress) {
+    return <P_Production_Progress text={"당신의 목소리를 듣는 중입니다"}></P_Production_Progress>;
+  }
 
   return (
     <div className="voice-upload-container">
