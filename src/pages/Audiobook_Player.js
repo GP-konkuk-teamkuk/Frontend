@@ -4,7 +4,7 @@ import pauseIcon from "../icons/pause.svg";
 import stopIcon from "../icons/stop.svg";
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
-const SERVER_URL = process.env.SERVER_URL;
+import { SERVER_URL } from "App";
 
 export default function P_Audiobook_Player() {
   const [bookInfo, setBookInfo] = useState();

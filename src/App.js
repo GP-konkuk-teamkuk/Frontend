@@ -12,6 +12,7 @@ import P_Production_Progress from "pages/Production_Progress";
 import Layout from "containers/Layout";
 import P_Register from "pages/Register";
 import P_Production_Complete from "pages/Production_Complete";
+export const SERVER_URL = "http://localhost:3001/";
 
 function App() {
   const [homePage, setHomePage] = useState("home");

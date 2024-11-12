@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bookInfo from "../database/bookinfo.json"; // 테스트 (서버 연동 X)
 import testImage from "../database/testImage.png"; // 테스트 (서버 연동 X)
-const SERVER_URL = process.env.SERVER_URL;
+import { SERVER_URL } from "App";
 
 function BookList({ bookInfos }) {
   return (

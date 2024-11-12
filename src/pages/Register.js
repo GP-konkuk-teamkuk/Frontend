@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import "./Register.css";
 import { HomePageContext, useAuth } from "components/Context";
 import { useNavigate } from "react-router-dom";
-const SERVER_URL = process.env.SERVER_URL;
+import { SERVER_URL } from "App";
 
 export function F_Login() {
   const { homePage, setHomePage } = useContext(HomePageContext);
@@ -82,7 +82,7 @@ export default function F_Register() {
 
   const onSubmitRegister = async (event) => {
     event.preventDefault();
-    const userData = { nickname, id: userId, pw: userPw };
+    const userData = { nickname: nickname, id: userId, pw: userPw };
 
     console.log(userData);
 

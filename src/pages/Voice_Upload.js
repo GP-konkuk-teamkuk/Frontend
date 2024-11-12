@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import "./Voice_Upload.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "components/Context";
-const SERVER_URL = process.env.SERVER_URL;
+import { SERVER_URL } from "App";
 
 export default function P_Voice_Upload() {
   const [file, setFile] = useState(null);

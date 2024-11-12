@@ -6,7 +6,7 @@ import { useAuth } from "components/Context";
 import test_bookInfo from "../database/bookinfo.json"; // 테스트 (서버 연동 X)
 import testImage from "../database/testImage.png"; // 테스트 (서버 연동 X)
 import P_Production_Progress from "./Production_Progress";
-const SERVER_URL = process.env.SERVER_URL;
+import { SERVER_URL } from "App";
 
 export default function P_Book_Detail() {
   // const [bookInfo, setBookInfo] = useState(test_bookInfo.detailInfos[0]); //테스트 (서버 연동 X)

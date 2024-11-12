@@ -1,10 +1,10 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
+import { SERVER_URL } from "App";
 
 export const HomePageContext = createContext("main");
 
 const AuthContext = createContext();
-const SERVER_URL = process.env.SERVER_URL;
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({ userId: "", id: "", nickname: "" }); // 서버 연동 O
