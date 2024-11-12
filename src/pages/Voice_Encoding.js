@@ -1,6 +1,6 @@
 import { Wait_and_Complete } from "components/Component";
 import { GridLoader, ScaleLoader } from "react-spinners";
-import spinner from "../icons/spinner-solid.svg";
+import spinner from "../icons/spinner.svg";
 
 export default function P_Voice_Encoding() {
   const imgStyle = {

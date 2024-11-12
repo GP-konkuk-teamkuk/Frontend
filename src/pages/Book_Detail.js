@@ -43,6 +43,7 @@ export default function P_Book_Detail() {
   };
 
   const onClickProduction = async () => {
+    navigate(`/production-progress`);
     try {
       const response = await fetch(AUDIOBOOK_PRODUCTION_SERVER_URL, {
         method: "POST",
