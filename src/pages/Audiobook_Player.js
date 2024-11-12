@@ -21,30 +21,30 @@ export default function P_Audiobook_Player() {
 
   // 프론트엔드 단독 환경(로컬)에서 테스트하는 코드
   // 책 데이터 불러오기
-  useEffect(() => {
-    const fetchBookDetails = async () => {
-      try {
-        const response = await fetch("http://localhost:3001/detailInfos");
-        const data = await response.json();
-        const book = data.find((item) => item.id === 1);
-        setBookInfo(book); // bookInfo state에 데이터 저장
-        console.log(data, book);
-      } catch (error) {
-        console.error("Error fetching book details:", error);
-      }
-    };
-    fetchBookDetails();
-  }, []); // 컴포넌트가 마운트될 때 한 번만 실행
+  // useEffect(() => {
+  //   const fetchBookDetails = async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:3001/detailInfos");
+  //       const data = await response.json();
+  //       const book = data.find((item) => item.id === 1);
+  //       setBookInfo(book); // bookInfo state에 데이터 저장
+  //       console.log(data, book);
+  //     } catch (error) {
+  //       console.error("Error fetching book details:", error);
+  //     }
+  //   };
+  //   fetchBookDetails();
+  // }, []); // 컴포넌트가 마운트될 때 한 번만 실행
 
-  useEffect(() => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.play().catch((error) => console.error("Play error: ", error));
-      } else {
-        audioRef.current.pause();
-      }
-    }
-  }, [isPlaying]);
+  // useEffect(() => {
+  //   if (audioRef.current) {
+  //     if (isPlaying) {
+  //       audioRef.current.play().catch((error) => console.error("Play error: ", error));
+  //     } else {
+  //       audioRef.current.pause();
+  //     }
+  //   }
+  // }, [isPlaying]);
 
   // 서버 연동 시 실행 코드
   // useEffect(() => {
@@ -80,19 +80,19 @@ export default function P_Audiobook_Player() {
 
   const togglePlayPause = () => {
     // useEffect 없을 때. 실제 구동 환경.
-    // if (audioRef.current) {
-    //   if (isPlaying) {
-    //     audioRef.current.pause();
-    //   } else {
-    //     audioRef.current.play();
-    //   }
-    //   setIsPlaying(!isPlaying);
-    // } else {
-    //   setIsPlaying(!isPlaying); // 오디오 파일 없을 때 테스트.
-    // }
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    } else {
+      setIsPlaying(!isPlaying); // 오디오 파일 없을 때 테스트.
+    }
 
     // useEffect 있을 때. 프론트엔드 단독 테스트 환경.
-    setIsPlaying((prev) => !prev);
+    // setIsPlaying((prev) => !prev);
   };
 
   const handleStop = () => {
@@ -108,25 +108,6 @@ export default function P_Audiobook_Player() {
       audioRef.current.volume = event.target.value;
     }
   };
-
-  // const handlePlay = () => {
-  //   if (audioRef.current) {
-  //     audioRef.current.play();
-  //   }
-  // };
-
-  // const handlePause = () => {
-  //   if (audioRef.current) {
-  //     audioRef.current.pause();
-  //   }
-  // };
-
-  // const handleStop = () => {
-  //   if (audioRef.current) {
-  //     audioRef.current.pause();
-  //     audioRef.current.currentTime = 0;
-  //   }
-  // };
 
   return (
     <div className="audiobook-player-container">
