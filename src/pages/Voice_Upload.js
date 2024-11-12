@@ -2,12 +2,13 @@ import { useState, useRef } from "react";
 import "./Voice_Upload.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "components/Context";
+const SERVER_URL = process.env.SERVER_URL;
 
 export default function P_Voice_Upload() {
   const [file, setFile] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const fileInputRef = useRef(null);
-  const SERVER_URL_FOR_UPLOAD = "http://localhost:3001/api/audio/upload";
+  const SERVER_URL_FOR_UPLOAD = `${SERVER_URL}/api/audio/upload`;
   const navigate = useNavigate();
   const { user } = useAuth();
 

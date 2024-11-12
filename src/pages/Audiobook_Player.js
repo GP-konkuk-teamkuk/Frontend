@@ -4,6 +4,7 @@ import pause from "../icons/pause.svg";
 import stop from "../icons/stop.svg";
 import { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
+const SERVER_URL = process.env.SERVER_URL;
 
 export default function P_Audiobook_Player() {
   const [bookInfo, setBookInfo] = useState();
@@ -16,7 +17,7 @@ export default function P_Audiobook_Player() {
   const userId = queryParams.get("userId");
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/book/detail?bookId=${bookId}`)
+    fetch(`${SERVER_URL}/api/book/detail?bookId=${bookId}`)
       .then(async (res) => {
         const json = await res.json();
         return json;
@@ -37,7 +38,7 @@ export default function P_Audiobook_Player() {
   }, [bookId]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/audio?userId=${userId}&bookId=${bookId}`)
+    fetch(`${SERVER_URL}/api/audio?userId=${userId}&bookId=${bookId}`)
       .then((res) => res.blob())
       .then((blob) => {
         const url = URL.createObjectURL(blob);

@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react";
 export const HomePageContext = createContext("main");
 
 const AuthContext = createContext();
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const SERVER_URL = process.env.SERVER_URL;
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({ userId: "", id: "", nickname: "" });
@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (id, pw) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/login",
+        `${SERVER_URL}/api/login`,
         { id: id, pw: pw },
         { withCredentials: true }
       );
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post("http://localhost:3001/api/logout", {}, { withCredentials: true });
+      await axios.post(`${SERVER_URL}/api/logout`, {}, { withCredentials: true });
       setUser({ userId: "", id: "", nickname: "" });
     } catch (error) {
       alert("로그아웃 실패");

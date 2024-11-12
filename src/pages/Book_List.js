@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bookInfo from "../database/bookinfo.json"; // 테스트 (서버 연동 X)
 import testImage from "../database/testImage.png"; // 테스트 (서버 연동 X)
+const SERVER_URL = process.env.SERVER_URL;
 
 function BookList({ bookInfos }) {
   return (
@@ -25,7 +26,7 @@ function BookList({ bookInfos }) {
 export default function P_Book_List() {
   const [page, setPage] = useState(1);
   const limit = 10;
-  const URL = "http://localhost:3001/api/book";
+  const URL = `${SERVER_URL}/api/book`;
   const [url, setURL] = useState(`${URL}?page=${page}&limit=${limit}`);
   const [bookInfos, setBookInfos] = useState(); // 서버 연동 O
   // const [bookInfos, setBookInfos] = useState(bookInfo.generalInfos); // 테스트(서버 연동 X)

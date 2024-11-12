@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import "./Register.css";
 import { HomePageContext, useAuth } from "components/Context";
 import { useNavigate } from "react-router-dom";
+const SERVER_URL = process.env.SERVER_URL;
 
 export function F_Login() {
   const { homePage, setHomePage } = useContext(HomePageContext);
@@ -53,8 +54,7 @@ export function F_Login() {
 
 async function registerUser(userData) {
   try {
-    const url = "http://localhost:3001";
-    const response = await fetch(url + "/api/register", {
+    const response = await fetch(`${SERVER_URL}/api/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -5,19 +5,20 @@ import { Title_Lv1, Title_Lv2, Text_Lv3 } from "components/Component";
 import { useAuth } from "components/Context";
 import test_bookInfo from "../database/bookinfo.json"; // 테스트 (서버 연동 X)
 import testImage from "../database/testImage.png"; // 테스트 (서버 연동 X)
+const SERVER_URL = process.env.SERVER_URL;
 
 export default function P_Book_Detail() {
   // const [bookInfo, setBookInfo] = useState(test_bookInfo.detailInfos[0]); //테스트 (서버 연동 X)
   const [bookInfo, setBookInfo] = useState(null); //테스트 (서버 연동 X)
   const navigate = useNavigate();
   const location = useLocation();
-  const AUDIOBOOK_PRODUCTION_SERVER_URL = "http://localhost:3001/api/audio";
+  const AUDIOBOOK_PRODUCTION_SERVER_URL = `${SERVER_URL}/api/audio`;
   const { user } = useAuth();
   const queryParams = new URLSearchParams(location.search);
   const bookId = queryParams.get("bookId");
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/book/detail?bookId=${bookId}`)
+    fetch(`${SERVER_URL}/api/book/detail?bookId=${bookId}`)
       .then(async (res) => {
         const json = await res.json();
         return json;
