@@ -118,10 +118,10 @@ export default function P_Audiobook_Player() {
           </div>
           <span className="textbook-pagenum pagenum-left">1</span>
         </div>
-        <div className="textbook-frame">
+        {/* <div className="textbook-frame">
           <div className="textbook-content text-content-right"></div>
           <span className="textbook-pagenum pagenum-right">2</span>
-        </div>
+        </div> */}
       </div>
       <div className="playbar-container">
         <button className="icon-button" onClick={togglePlayPause}>
