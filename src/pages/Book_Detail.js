@@ -92,7 +92,7 @@ export default function P_Book_Detail() {
             <div className="detail-running-time">
               <Text_Lv3>예상 소요시간: {bookInfo.runningTime}분</Text_Lv3>
             </div>
-            <div className="intro">
+            <div className="intro ellipsis">
               <Title_Lv2>개요</Title_Lv2>
               <Text_Lv3>{bookInfo.intro}</Text_Lv3>
             </div>
