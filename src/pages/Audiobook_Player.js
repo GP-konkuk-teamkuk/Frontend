@@ -113,11 +113,12 @@ export default function P_Audiobook_Player() {
     <div className="audiobook-player-container">
       <div className="textbook-container">
         <div className="textbook-frame">
-          <div className="textbook-content text-content-left loading-text">
+          <div className="textbook-content text-content-center loading-text">
             {bookInfo ? bookInfo.intro : "Loading..."}
           </div>
-          <span className="textbook-pagenum pagenum-left">1</span>
+          <span className="textbook-pagenum pagenum-center">1</span>
         </div>
+        {/* 페이지가 좌우로 2개 존재할 경우 */}
         {/* <div className="textbook-frame">
           <div className="textbook-content text-content-right"></div>
           <span className="textbook-pagenum pagenum-right">2</span>

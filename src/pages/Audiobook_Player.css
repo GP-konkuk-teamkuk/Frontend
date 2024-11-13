@@ -37,6 +37,9 @@
   right: 2rem;
   bottom: 1rem;
 }
+.pagenum-center {
+  bottom: 1rem;
+}
 
 .playbar-container {
   height: 130px;
