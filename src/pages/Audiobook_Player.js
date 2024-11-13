@@ -62,6 +62,7 @@ export default function P_Audiobook_Player() {
           press: data.press,
           runningTime: data.runningTime,
           intro: data.intro,
+          content: data.content,
         };
         setBookInfo(bookData);
       })
@@ -114,7 +115,7 @@ export default function P_Audiobook_Player() {
       <div className="textbook-container">
         <div className="textbook-frame">
           <div className="textbook-content text-content-center loading-text">
-            {bookInfo ? bookInfo.intro : "Loading..."}
+            {bookInfo ? bookInfo.content : "Loading..."}
           </div>
           <span className="textbook-pagenum pagenum-center">1</span>
         </div>
