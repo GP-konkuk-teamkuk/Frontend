@@ -73,7 +73,7 @@ export default function P_Audiobook_Player() {
         };
         setBookInfo(bookData);
 
-        const sentences = book.content;
+        const sentences = bookData.content;
         const regex = /.*?\.\s|.*?\.\n|.*?\.$/g;
         const result = sentences.match(regex);
         setBookSentences(result);
@@ -169,7 +169,7 @@ export default function P_Audiobook_Player() {
         />
         <div className="flex-center book-pagination-container">
           <button
-            onClick={() => setBookPage(page - 1)}
+            onClick={() => setBookPage(bookPage - 1)}
             className={`page-btn ${bookPage === 1 ? "hidden" : null}`}
           >
             이전
