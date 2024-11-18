@@ -8,9 +8,8 @@ import { SERVER_URL } from "App";
 
 export default function P_Audiobook_Player() {
   const [bookInfo, setBookInfo] = useState();
-  const [textLeft, setTextLeft] = useState("");
-  const [textRight, setTextRight] = useState("");
   const [audioSrc, setAudioSrc] = useState(null);
+  const [playingSentenceIndex, setPlayingSentenceIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const location = useLocation();
@@ -19,16 +18,23 @@ export default function P_Audiobook_Player() {
   const bookId = queryParams.get("bookId");
   const userId = queryParams.get("userId");
 
-  // 프론트엔드 단독 환경(로컬)에서 테스트하는 코드
+  const [bookSentences, setBookSentences] = useState([]);
+  const [bookPage, setBookPage] = useState(1);
+
+  // 프론트 단독 환경 실행 코드 시작
   // 책 데이터 불러오기
   // useEffect(() => {
   //   const fetchBookDetails = async () => {
   //     try {
   //       const response = await fetch("http://localhost:3001/detailInfos");
   //       const data = await response.json();
-  //       const book = data.find((item) => item.id === 1);
+  //       const book = data.find((item) => item.id === "1");
   //       setBookInfo(book); // bookInfo state에 데이터 저장
-  //       console.log(data, book);
+
+  //       const sentences = book.content;
+  //       const regex = /.*?\.\s|.*?\.\n|.*?\.$/g;
+  //       const result = sentences.match(regex);
+  //       setBookSentences(result);
   //     } catch (error) {
   //       console.error("Error fetching book details:", error);
   //     }
@@ -45,8 +51,9 @@ export default function P_Audiobook_Player() {
   //     }
   //   }
   // }, [isPlaying]);
+  // 프론트 단독 환경 실행 코드 종료
 
-  // 서버 연동 시 실행 코드
+  // 서버 연동 시 실행 코드 시작
   useEffect(() => {
     fetch(`${SERVER_URL}/api/book/detail?bookId=${bookId}`)
       .then(async (res) => {
@@ -65,6 +72,11 @@ export default function P_Audiobook_Player() {
           content: data.content,
         };
         setBookInfo(bookData);
+
+        const sentences = book.content;
+        const regex = /.*?\.\s|.*?\.\n|.*?\.$/g;
+        const result = sentences.match(regex);
+        setBookSentences(result);
       })
       .catch((error) => console.error("Error: ", error));
   }, [bookId]);
@@ -78,6 +90,7 @@ export default function P_Audiobook_Player() {
       })
       .catch((error) => console.error("Error: ", error));
   }, [userId, bookId]);
+  // 서버 연동 시 실행 코드 종료
 
   const togglePlayPause = () => {
     // useEffect 없을 때. 실제 구동 환경.
@@ -114,8 +127,22 @@ export default function P_Audiobook_Player() {
     <div className="audiobook-player-container">
       <div className="textbook-container">
         <div className="textbook-frame">
-          <div className="textbook-content text-content-center loading-text">
-            {bookInfo ? bookInfo.content : "Loading..."}
+          <div
+            className={`textbook-content text-content-center ${
+              bookSentences.length !== 0 ? "" : "player-loading-text"
+            }`}
+          >
+            {bookSentences.length !== 0
+              ? bookSentences.map((sentence, i) => {
+                  const isEnter = sentence.includes("\n");
+                  return (
+                    <span key={i} className={`${playingSentenceIndex === i ? "highlight" : ""}`}>
+                      {sentence}
+                      {isEnter ? <br /> : null}
+                    </span>
+                  );
+                })
+              : "Loading..."}
           </div>
           <span className="textbook-pagenum pagenum-center">1</span>
         </div>
@@ -140,7 +167,18 @@ export default function P_Audiobook_Player() {
           onChange={handleVolumeChange}
           className="volume-bar"
         />
-        {/* <div className="progressbar-background"></div> */}
+        <div className="flex-center book-pagination-container">
+          <button
+            onClick={() => setBookPage(page - 1)}
+            className={`page-btn ${bookPage === 1 ? "hidden" : null}`}
+          >
+            이전
+          </button>
+          <p className="page-p">{bookPage}</p>
+          <button onClick={() => setBookPage(bookPage + 1)} className="page-btn">
+            다음
+          </button>
+        </div>
         {/* 서버 연동 시 코드 */}
         {/* {audioSrc && <audio ref={audioRef} src={audioSrc} controls />} */}
         {/* 서버 연동 X 테스트 코드 */}

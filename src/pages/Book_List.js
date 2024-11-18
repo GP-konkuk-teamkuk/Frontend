@@ -30,7 +30,6 @@ export default function P_Book_List() {
   const [url, setURL] = useState(`${URL}?page=${page}&limit=${limit}`);
   const [bookInfos, setBookInfos] = useState(); // 서버 연동 O
   // const [bookInfos, setBookInfos] = useState(bookInfo.generalInfos); // 테스트(서버 연동 X)
-  // const [bookInfos, setBookInfos] = useState(null); // 테스트(서버 연동 X)
 
   useEffect(() => {
     setURL(`${URL}?page=${page}&limit=${limit}`);
