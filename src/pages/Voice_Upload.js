@@ -68,7 +68,7 @@ export default function P_Voice_Upload() {
   return (
     <div className="voice-upload-container">
       <div className="flex-center min-height-9rem">
-        <div className="msg-lv1">당신이 오디오로 듣고 싶은 목소리를 들려주세요</div>
+        <div className="msg-lv1">당신이 오디오북으로 듣고 싶은 목소리를 들려주세요</div>
       </div>
       <div className="button-container">
         <label htmlFor="file-upload" className="file-upload btn-lv1">
