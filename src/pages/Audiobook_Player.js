@@ -76,9 +76,9 @@ export default function P_Audiobook_Player() {
         setBookInfo(bookData);
 
         const sentences = bookData.content;
-        const regex = /.*?\.\s|.*?\.\n|.*?\.\s\n|.*?\.$/g;
-        const result = sentences.match(regex);
-        setBookSentences(result);
+        // const regex = /.*?\.\s|.*?\.\n|.*?\.\s\n|.*?\.$/g;
+        // const result = sentences.match(regex);
+        setBookSentences([sentences]);
       })
       .catch((error) => console.error("Error: ", error));
   }, [bookId]);

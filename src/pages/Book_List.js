@@ -28,8 +28,8 @@ export default function P_Book_List() {
   const limit = 10;
   const URL = `${SERVER_URL}/api/book`;
   const [url, setURL] = useState(`${URL}?page=${page}&limit=${limit}`);
-  const [bookInfos, setBookInfos] = useState(); // 서버 연동 O
-  // const [bookInfos, setBookInfos] = useState(bookInfo.generalInfos); // 테스트(서버 연동 X)
+  // const [bookInfos, setBookInfos] = useState(); // 서버 연동 O
+  const [bookInfos, setBookInfos] = useState(bookInfo.generalInfos); // 테스트(서버 연동 X)
 
   useEffect(() => {
     setURL(`${URL}?page=${page}&limit=${limit}`);
@@ -50,30 +50,30 @@ export default function P_Book_List() {
 
   return (
     <>
-      <div className="content-container flex-center">
-        {bookInfos ? (
-          <div className="book-list-container">
-            <div className="msg-lv1 flex-center min-height-9rem">듣고 싶은 책을 골라주세요</div>
-            <div className="booklist-grid-container">
-              <BookList bookInfos={bookInfos} />
-            </div>
-            <div className="flex-center pagination-btn-container">
-              <button
-                onClick={() => setPage(page - 1)}
-                className={`page-btn ${page === 1 ? "hidden" : null}`}
-              >
-                이전
-              </button>
-              <p className="page-p">{page}</p>
-              <button onClick={() => setPage(page + 1)} className="page-btn">
-                다음
-              </button>
-            </div>
+      {bookInfos ? (
+        <div className="book-list-container">
+          <div className="flex-center main-section min-height-9rem">
+            <div className="msg-lv1 ">듣고 싶은 책을 골라주세요</div>
           </div>
-        ) : (
-          <p className="loading-text">Loading...</p>
-        )}
-      </div>
+          <div className="booklist-grid-container">
+            <BookList bookInfos={bookInfos} />
+          </div>
+          <div className="flex-center pagination-btn-container">
+            <button
+              onClick={() => setPage(page - 1)}
+              className={`page-btn ${page === 1 ? "hidden" : null}`}
+            >
+              이전
+            </button>
+            <p className="page-p">{page}</p>
+            <button onClick={() => setPage(page + 1)} className="page-btn">
+              다음
+            </button>
+          </div>
+        </div>
+      ) : (
+        <p className="loading-text">Loading...</p>
+      )}
     </>
   );
 }

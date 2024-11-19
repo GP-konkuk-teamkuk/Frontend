@@ -34,41 +34,6 @@
         "image": "./bookImage.png",
         "author": "Author5",
         "runningTime": "50"
-    },
-    {
-        "id": "6",
-        "title": "Title6",
-        "image": "./bookImage.png",
-        "author": "Author6",
-        "runningTime": "60"
-    },
-    {
-        "id": "7",
-        "title": "Title7",
-        "image": "./bookImage.png",
-        "author": "Author7",
-        "runningTime": "70"
-    },
-    {
-        "id": "8",
-        "title": "Title8",
-        "image": "./bookImage.png",
-        "author": "Author8",
-        "runningTime": "80"
-    },
-    {
-        "id": "9",
-        "title": "Title9",
-        "image": "./bookImage.png",
-        "author": "Author9",
-        "runningTime": "90"
-    },
-    {
-        "id": "10",
-        "title": "Title10",
-        "image": "./bookImage.png",
-        "author": "Author10",
-        "runningTime": "100"
     }
   ],
   "detailInfos": [
