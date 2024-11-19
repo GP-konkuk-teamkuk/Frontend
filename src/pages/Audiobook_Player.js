@@ -174,7 +174,7 @@ export default function P_Audiobook_Player() {
           >
             이전
           </button>
-          <p className="page-p">{bookPage}</p>
+          <p className="book-page-p">{bookPage}</p>
           <button onClick={() => setBookPage(bookPage + 1)} className="page-btn">
             다음
           </button>
