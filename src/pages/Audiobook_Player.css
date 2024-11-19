@@ -76,3 +76,17 @@ button.icon-button {
   font-size: 1rem;
   font-weight: 500;
 }
+.book-page-input {
+  all: reset;
+  width: 2rem;
+  margin-right: 0.5rem;
+  padding: 0.1rem 0.3rem;
+  border: 0.1rem solid;
+  border-color: #756AB6;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.book-lastpage-span {
+  margin-left: 0.5rem;
+}

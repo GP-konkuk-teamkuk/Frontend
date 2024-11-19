@@ -20,6 +20,8 @@ export default function P_Audiobook_Player() {
 
   const [bookSentences, setBookSentences] = useState([]);
   const [bookPage, setBookPage] = useState(1);
+  const [inputBookPage, setInputBookPage] = useState(bookPage);
+  const [bookLastPage, setBookLastPage] = useState(325);
 
   // 프론트 단독 환경 실행 코드 시작
   // 책 데이터 불러오기
@@ -123,6 +125,10 @@ export default function P_Audiobook_Player() {
     }
   };
 
+  const onChangePageInput = (event) => {
+    setInputBookPage(event.target.value);
+  };
+
   return (
     <div className="audiobook-player-container">
       <div className="textbook-container">
@@ -135,8 +141,11 @@ export default function P_Audiobook_Player() {
             {bookSentences.length !== 0
               ? bookSentences.map((sentence, i) => {
                   const isEnter = sentence.includes("\n");
+                  const indent =
+                    i === 0 || (i > 0 && bookSentences[i - 1].includes("\n")) ? "\u00A0\u00A0" : "";
                   return (
                     <span key={i} className={`${playingSentenceIndex === i ? "highlight" : ""}`}>
+                      {indent}
                       {sentence}
                       {isEnter ? <br /> : null}
                     </span>
@@ -144,7 +153,7 @@ export default function P_Audiobook_Player() {
                 })
               : "Loading..."}
           </div>
-          <span className="textbook-pagenum pagenum-center">1</span>
+          <span className="textbook-pagenum pagenum-center">{bookPage}</span>
         </div>
         {/* 페이지가 좌우로 2개 존재할 경우 */}
         {/* <div className="textbook-frame">
@@ -170,11 +179,19 @@ export default function P_Audiobook_Player() {
         <div className="flex-center book-pagination-container">
           <button
             onClick={() => setBookPage(bookPage - 1)}
-            className={`page-btn ${bookPage === 1 ? "hidden" : null}`}
+            className={`page-btn ${bookPage === 1 ? "" : null}`}
           >
             이전
           </button>
-          <p className="book-page-p">{bookPage}</p>
+          <p className="flex-center book-page-p">
+            <input
+              type="text"
+              className="book-page-input"
+              value={inputBookPage}
+              onChange={onChangePageInput}
+            />
+            /<span className="book-lastpage-span">{bookLastPage}</span>
+          </p>
           <button onClick={() => setBookPage(bookPage + 1)} className="page-btn">
             다음
           </button>
@@ -186,4 +203,8 @@ export default function P_Audiobook_Player() {
       </div>
     </div>
   );
+}
+
+{
+  /* <span className="book-page-span">{bookPage}</span>  */
 }
