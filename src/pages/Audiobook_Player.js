@@ -32,7 +32,7 @@ export default function P_Audiobook_Player() {
   //       setBookInfo(book); // bookInfo state에 데이터 저장
 
   //       const sentences = book.content;
-  //       const regex = /.*?\.\s|.*?\.\n|.*?\.$/g;
+  //       const regex = /.*?\.\s|.*?\.\n|.*?\.\s\n|.*?\.$/g;
   //       const result = sentences.match(regex);
   //       setBookSentences(result);
   //     } catch (error) {
@@ -74,7 +74,7 @@ export default function P_Audiobook_Player() {
         setBookInfo(bookData);
 
         const sentences = bookData.content;
-        const regex = /.*?\.\s|.*?\.\n|.*?\.$/g;
+        const regex = /.*?\.\s|.*?\.\n|.*?\.\s\n|.*?\.$/g;
         const result = sentences.match(regex);
         setBookSentences(result);
       })
