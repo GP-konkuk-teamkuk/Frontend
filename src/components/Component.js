@@ -18,14 +18,3 @@ export const Title_Lv2 = ({ children }) => {
 export const Text_Lv3 = ({ children }) => {
   return <p className="text-lv3">{children}</p>;
 };
-
-export function Wait_and_Complete({ icon, msgLv2Text }) {
-  return (
-    <>
-      <div className="flex-center">{icon}</div>
-      <div className="flex-center">
-        <div className="msg-lv2">{msgLv2Text}</div>
-      </div>
-    </>
-  );
-}
