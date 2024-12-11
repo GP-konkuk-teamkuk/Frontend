@@ -5,6 +5,27 @@ import bookInfo from "../database/bookinfo.json"; // 테스트 (서버 연동 X)
 import testImage from "../database/testImage.png"; // 테스트 (서버 연동 X)
 import { SERVER_URL } from "App";
 
+function BookItem({ id, title, author, runningTime, image }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/book-detail?bookId=${id}`);
+  };
+
+  return (
+    <div className="item-book" onClick={handleClick}>
+      <img src={image} alt={title}></img>
+      {/* 서버 연동 O */}
+      {/* <img src={testImage} alt={title}></img> */}
+      {/* 테스트 (서버 연동 X) */}
+      <div className="book-title">{title}</div>
+      <div className="author">{author}</div>
+      <div className="running-time">{runningTime}분</div>
+      {/* 2차 중간 발표 이후 */}
+    </div>
+  );
+}
+
 function BookList({ bookInfos }) {
   return (
     <>
@@ -75,26 +96,5 @@ export default function P_Book_List() {
         <p className="loading-text">Loading...</p>
       )}
     </>
-  );
-}
-
-function BookItem({ id, title, author, runningTime, image }) {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(`/book-detail?bookId=${id}`);
-  };
-
-  return (
-    <div className="item-book" onClick={handleClick}>
-      <img src={image} alt={title}></img>
-      {/* 서버 연동 O */}
-      {/* <img src={testImage} alt={title}></img> */}
-      {/* 테스트 (서버 연동 X) */}
-      <div className="book-title">{title}</div>
-      <div className="author">{author}</div>
-      <div className="running-time">{runningTime}분</div>
-      {/* 2차 중간 발표 이후 */}
-    </div>
   );
 }

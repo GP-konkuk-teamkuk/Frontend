@@ -5,7 +5,7 @@ import { Title_Lv1, Title_Lv2, Text_Lv3 } from "components/Component";
 import { useAuth } from "components/Context";
 import test_bookInfo from "../database/bookinfo.json"; // 테스트 (서버 연동 X)
 import testImage from "../database/testImage.png"; // 테스트 (서버 연동 X)
-import P_Production_Progress from "./Production_Progress";
+import P_Progress from "./Progress";
 import { SERVER_URL } from "App";
 
 export default function P_Book_Detail() {
@@ -67,9 +67,7 @@ export default function P_Book_Detail() {
   };
 
   if (isProductionProgress) {
-    return (
-      <P_Production_Progress text={"당신의 목소리로 책을 만들고 있어요"}></P_Production_Progress>
-    );
+    return <P_Progress text={"당신의 목소리로 책을 만들고 있어요"}></P_Progress>;
   }
 
   return bookInfo ? (

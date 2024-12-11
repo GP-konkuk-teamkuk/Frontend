@@ -3,7 +3,7 @@ import "./Voice_Upload.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "components/Context";
 import { SERVER_URL } from "App";
-import P_Production_Progress from "./Production_Progress";
+import P_Progress from "./Progress";
 
 export default function P_Voice_Upload() {
   const [file, setFile] = useState(null);
@@ -62,7 +62,7 @@ export default function P_Voice_Upload() {
   };
 
   if (isEncodingProgress) {
-    return <P_Production_Progress text={"당신의 목소리를 듣는 중입니다"}></P_Production_Progress>;
+    return <P_Progress text={"당신의 목소리를 듣는 중입니다"}></P_Progress>;
   }
 
   return (

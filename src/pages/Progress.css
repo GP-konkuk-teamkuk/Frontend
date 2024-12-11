@@ -1,0 +1,32 @@
+.production-progress-container {
+  width: 100%;
+  height: 100%;
+}
+.status-icon-container {
+  height: 30rem;
+}
+.status-icon {
+  width: 10rem;
+  height: 10rem;
+  animation: rotation 1.5s linear infinite;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-icon {
+  width: 10rem;
+  fill: #756AB6;
+}
+status-icon-container > .icon-size {
+  width: 10rem !important;
+
+}
+.message-container {
+  height: calc(100% - 30rem);
+}
