@@ -53,32 +53,32 @@ export function F_Login() {
   );
 }
 
-async function registerUser(userData) {
-  try {
-    const response = await fetch(`${SERVER_URL}/api/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
-
-    if (!response.ok) {
-      throw new Error("회원가입에 실패했습니다.");
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error("회원가입 에러: ", error);
-    throw error;
-  }
-}
-
 export default function F_Register() {
   const { homePage, setHomePage } = useContext(HomePageContext);
   const [nickname, setNickname] = useState("");
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
+
+  async function registerUser(userData) {
+    try {
+      const response = await fetch(`${SERVER_URL}/api/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error("회원가입에 실패했습니다.");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("회원가입 에러: ", error);
+      throw error;
+    }
+  }
 
   const onSubmitRegister = async (event) => {
     event.preventDefault();
