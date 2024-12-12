@@ -7,10 +7,8 @@ import P_Voice_Upload from "pages/Voice_Upload";
 import P_Book_List from "pages/Book_List";
 import P_Audiobook_Player from "pages/Audiobook_Player";
 import P_Book_Detail from "pages/Book_Detail";
-import P_Progress from "pages/Progress";
 import Layout from "containers/Layout";
 import P_Register from "pages/Register";
-import P_Production_Complete from "pages/Production_Complete";
 export const SERVER_URL = "http://localhost:3001";
 
 function App() {
@@ -19,8 +17,8 @@ function App() {
   // const [homePage, setHomePage] = useState("login");
 
   return (
-    <BrowserRouter>
-      <div className="App">
+    <div className="App">
+      <BrowserRouter>
         <AuthProvider>
           <HomePageContext.Provider value={{ homePage, setHomePage }}>
             <Routes>
@@ -30,14 +28,13 @@ function App() {
                 <Route path="/voice-upload" element={<P_Voice_Upload />} />
                 <Route path="/book-list" element={<P_Book_List />} />
                 <Route path="/book-detail" element={<P_Book_Detail />} />
-                <Route path="/production-complete" element={<P_Production_Complete />} />
                 <Route path="/audiobook-player" element={<P_Audiobook_Player />} />
               </Route>
             </Routes>
           </HomePageContext.Provider>
         </AuthProvider>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </div>
   );
 }
 
